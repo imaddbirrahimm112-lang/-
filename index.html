@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>لوحة التحكم - الإيرادات والمندوبين</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%;width:100%}
+    body{
+      font-family:'Cairo',sans-serif;
+      color:#fff;
+      overflow:hidden;
+      background:#0b1020;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      background:linear-gradient(135deg,#0d0221,#1b0f45,#1f2a6b,#0d1b4d,#081229);
+      background-size:400% 400%;
+      animation:bgMove 18s ease infinite;
+      z-index:-2;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      inset:0;
+      background-image:
+        radial-gradient(1.5px 1.5px at 15px 25px,rgba(255,255,255,.8),transparent),
+        radial-gradient(1px 1px at 55px 65px,rgba(190,210,255,.8),transparent),
+        radial-gradient(2px 2px at 120px 45px,rgba(200,180,255,.85),transparent),
+        radial-gradient(1px 1px at 85px 110px,rgba(255,255,255,.65),transparent),
+        radial-gradient(1.5px 1.5px at 200px 85px,rgba(200,180,255,.75),transparent),
+        radial-gradient(1px 1px at 280px 130px,rgba(255,255,255,.85),transparent);
+      background-repeat:repeat;
+      background-size:360px 260px;
+      opacity:.55;
+      z-index:-1;
+      animation:twinkle 7s ease-in-out infinite;
+    }
+
+    @keyframes bgMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes twinkle{
+      0%,100%{opacity:.45}
+      50%{opacity:.9}
+    }
+    @keyframes pulse{
+      0%,100%{opacity:1}
+      50%{opacity:.35}
+    }
+
+    .app{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .topbar{
+      flex-shrink:0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:14px 18px;
+      background:rgba(255,255,255,.08);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.14);
+    }
+
+    .topbar-left{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      min-width:0;
+    }
+
+    .topbar-title{
+      font-size:18px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .topbar-sub{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      font-size:12px;
+      opacity:.85;
+    }
+
+    .sync-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      display:inline-block;
+    }
+    .sync-dot.ok{background:#48bb78}
+    .sync-dot.syncing{background:#f6ad55;animation:pulse .9s infinite}
+    .sync-dot.err{background:#fc8181}
+
+    .topbar-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:10px 16px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-family:'Cairo',sans-serif;
+      font-size:13px;
+      font-weight:700;
+      transition:.22s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:rgba(99,102,241,.65);
+      color:#fff;
+      border:1px solid rgba(99,102,241,.9);
+    }
+    .btn-secondary{
+      background:rgba(148,163,184,.25);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+    }
+
+    .content{
+      flex:1;
+      overflow-y:auto;
+      padding:18px;
+      background:rgba(255,255,255,.03);
+    }
+    .content::-webkit-scrollbar{width:6px}
+    .content::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.25);
+      border-radius:8px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.12);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:16px;
+      padding:18px;
+      margin-bottom:16px;
+      box-shadow:0 8px 30px rgba(0,0,0,.18);
+    }
+
+    .card h3{
+      font-size:17px;
+      font-weight:800;
+      margin-bottom:14px;
+    }
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:8px;
+    }
+    .filters > div{
+      flex:1;
+      min-width:150px;
+    }
+
+    .filters label{
+      display:block;
+      font-size:12px;
+      margin-bottom:5px;
+      font-weight:700;
+      color:#f3f4f6;
+    }
+
+    .input,.select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.1);
+      color:#fff;
+      font-family:'Cairo',sans-serif;
+      font-size:13px;
+    }
+    .input::placeholder{color:rgba(255,255,255,.55)}
+    .select option{
+      background:#111827;
+      color:#fff;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .region-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .stat-card{
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:14px 12px;
+      text-align:center;
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:6px;
+    }
+    .stat-card .label{
+      font-size:12px;
+      color:rgba(255,255,255,.78);
+      font-weight:700;
+    }
+    .stat-card .value{
+      font-size:19px;
+      font-weight:800;
+      line-height:1.2;
+    }
+    .stat-card .sub{
+      font-size:11px;
+      opacity:.75;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+      margin-bottom:16px;
+    }
+
+    .chart-box{
+      position:relative;
+      height:320px;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+    }
+
+    th{
+      background:rgba(255,255,255,.1);
+      color:#fff;
+      padding:11px 8px;
+      text-align:right;
+      font-size:13px;
+      border-bottom:2px solid rgba(255,255,255,.16);
+      white-space:nowrap;
+    }
+
+    td{
+      padding:10px 8px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-size:13px;
+      color:#fff;
+      white-space:nowrap;
+    }
+
+    tr:hover td{
+      background:rgba(255,255,255,.03);
+    }
+
+    .empty{
+      text-align:center;
+      padding:22px;
+      opacity:.7;
+      font-size:14px;
+    }
+
+    .msg-box{
+      position:fixed;
+      top:18px;
+      right:18px;
+      z-index:9999;
+    }
+    .msg{
+      padding:12px 16px;
+      border-radius:10px;
+      margin-bottom:8px;
+      font-size:13px;
+      backdrop-filter:blur(10px);
+      animation:fadeSlide .25s ease;
+    }
+    .msg.ok{
+      background:rgba(72,187,120,.28);
+      border:1px solid rgba(72,187,120,.6);
+      color:#b9f6ca;
+    }
+    .msg.err{
+      background:rgba(245,101,101,.28);
+      border:1px solid rgba(245,101,101,.6);
+      color:#ffc1c1;
+    }
+    @keyframes fadeSlide{
+      from{opacity:0;transform:translateY(-8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    @media (max-width: 1100px){
+      .stats-grid{grid-template-columns:repeat(2,1fr)}
+      .region-grid{grid-template-columns:repeat(2,1fr)}
+      .grid-2{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 700px){
+      .content{padding:12px}
+      .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .stats-grid{grid-template-columns:1fr 1fr}
+      .region-grid{grid-template-columns:1fr 1fr}
+      .chart-box{height:250px}
+    }
+
+    @media (max-width: 480px){
+      .stats-grid{grid-template-columns:1fr}
+      .region-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="msg-box" id="msgBox"></div>
+
+  <div class="app">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">📊 لوحة التحكم - الإيرادات والمندوبين</div>
+        <div class="topbar-sub">
+          <span id="todayLabel">اليوم: -</span>
+          <span id="syncWrap" style="display:flex;align-items:center;gap:6px">
+            <span class="sync-dot syncing" id="syncDot"></span>
+            <span id="syncText">جاري الاتصال...</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="Dashboard.refreshNow()">🔄 تحديث</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="card">
+        <h3>⚙️ إعدادات Firebase</h3>
+        <div class="filters">
+          <div>
+            <label>Firebase API Key</label>
+            <input type="text" id="apiKey" class="input" placeholder="ضع apiKey هنا">
+          </div>
+          <div>
+            <label>Auth Domain</label>
+            <input type="text" id="authDomain" class="input" placeholder="مثال: your-project.firebaseapp.com">
+          </div>
+          <div>
+            <label>Project ID</label>
+            <input type="text" id="projectId" class="input" placeholder="ضع projectId هنا">
+          </div>
+          <div>
+            <label>Collection Name</label>
+            <input type="text" id="collectionName" class="input" placeholder="reports">
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn btn-primary" onclick="Dashboard.saveConfigAndStart()">💾 حفظ وتشغيل</button>
+          <button class="btn btn-secondary" onclick="Dashboard.clearConfig()">🗑️ حذف الإعدادات</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🔎 الفلاتر</h3>
+        <div class="filters">
+          <div>
+            <label>المنطقة</label>
+            <select id="regionFilter" class="select" onchange="Dashboard.renderAll()">
+              <option value="">كل المناطق</option>
+              <option value="القامشلي">القامشلي</option>
+              <option value="الحسكة">الحسكة</option>
+              <option value="الرقة">الرقة</option>
+              <option value="الطبقة">الطبقة</option>
+              <option value="كوباني">كوباني</option>
+              <option value="منبج">منبج</option>
+            </select>
+          </div>
+
+          <div>
+            <label>من التاريخ</label>
+            <input type="date" id="dateFrom" class="input" onchange="Dashboard.renderAll()">
+          </div>
+
+          <div>
+            <label>إلى التاريخ</label>
+            <input type="date" id="dateTo" class="input" onchange="Dashboard.renderAll()">
+          </div>
+
+          <div>
+            <label>بحث باسم المندوب</label>
+            <input type="text" id="repSearch" class="input" placeholder="اكتب اسم المندوب" oninput="Dashboard.renderAll()">
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid" id="mainStats"></div>
+
+      <div class="card">
+        <h3>📍 إيراد اليوم حسب المنطقة</h3>
+        <div class="region-grid" id="todayRegionStats"></div>
+      </div>
+
+      <div class="card">
+        <h3>📌 إجمالي كل منطقة</h3>
+        <div class="region-grid" id="allRegionStats"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>📊 الإيراد حسب المنطقة</h3>
+          <div class="chart-box">
+            <canvas id="regionChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📈 الإيراد اليومي</h3>
+          <div class="chart-box">
+            <canvas id="dailyChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🧾 آخر العمليات - الجديد أول</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>المندوب</th>
+                <th>المنطقة</th>
+                <th>المبلغ SYP</th>
+                <th>سعر الصرف</th>
+                <th>المكافئ USD</th>
+                <th>تاريخ العملية</th>
+                <th>وقت الإضافة</th>
+              </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const REGIONS = ['القامشلي','الحسكة','الرقة','الطبقة','كوباني','منبج'];
+    const COLORS = ['#6366f1','#ec4899','#06b6d4','#10b981','#f59e0b','#ef4444'];
+
+    function $(id){ return document.getElementById(id); }
+
+    function fmtN(n){
+      return Number(n || 0).toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function todayStr(){
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+
+    function formatDateTime(value){
+      if(!value) return '-';
+      const d = new Date(value);
+      if(isNaN(d)) return value;
+      return d.toLocaleString('ar-SA');
+    }
+
+    function formatDateOnly(value){
+      if(!value) return '-';
+      const d = new Date(value);
+      if(isNaN(d)) return value;
+      return d.toLocaleDateString('ar-SA');
+    }
+
+    function normalizeRegion(item){
+      return item.region || item.city || '';
+    }
+
+    function normalizeAmountSYP(item){
+      if(item.amountSYP !== undefined && item.amountSYP !== null) return Number(item.amountSYP) || 0;
+      if(item.amount !== undefined && item.amount !== null) return Number(item.amount) || 0;
+      return 0;
+    }
+
+    function normalizeExchangeRate(item){
+      return Number(item.exchangeRate || item.rate || 0) || 0;
+    }
+
+    function normalizeAmountUSD(item){
+      if(item.amountUSD !== undefined && item.amountUSD !== null) return Number(item.amountUSD) || 0;
+      const syp = normalizeAmountSYP(item);
+      const rate = normalizeExchangeRate(item);
+      if(rate > 0) return syp / rate;
+      return 0;
+    }
+
+    function getCreatedTime(item){
+      const raw = item.createdAt || item.created_at || item.addedAt || item.timestamp || item.date || 0;
+      return new Date(raw).getTime() || 0;
+    }
+
+    function toast(text, type='ok'){
+      const box = $('msgBox');
+      const div = document.createElement('div');
+      div.className = 'msg ' + (type === 'err' ? 'err' : 'ok');
+      div.textContent = text;
+      box.appendChild(div);
+      setTimeout(() => {
+        div.remove();
+      }, 2600);
+    }
+
+    window.Dashboard = {
+      app: null,
+      db: null,
+      unsubscribe: null,
+      rawData: [],
+      charts: {
+        region: null,
+        daily: null
+      },
+
+      init(){
+        $('todayLabel').textContent = 'اليوم: ' + todayStr();
+        this.loadConfigToInputs();
+        this.autoStartIfConfig();
+      },
+
+      loadConfigToInputs(){
+        $('apiKey').value = localStorage.getItem('dash_apiKey') || '';
+        $('authDomain').value = localStorage.getItem('dash_authDomain') || '';
+        $('projectId').value = localStorage.getItem('dash_projectId') || '';
+        $('collectionName').value = localStorage.getItem('dash_collectionName') || 'reports';
+      },
+
+      saveConfigAndStart(){
+        const apiKey = $('apiKey').value.trim();
+        const authDomain = $('authDomain').value.trim();
+        const projectId = $('projectId').value.trim();
+        const collectionName = ($('collectionName').value.trim() || 'reports');
+
+        if(!apiKey || !authDomain || !projectId){
+          toast('⚠️ عبي بيانات Firebase كاملة', 'err');
+          return;
+        }
+
+        localStorage.setItem('dash_apiKey', apiKey);
+        localStorage.setItem('dash_authDomain', authDomain);
+        localStorage.setItem('dash_projectId', projectId);
+        localStorage.setItem('dash_collectionName', collectionName);
+
+        this.start();
+      },
+
+      clearConfig(){
+        localStorage.removeItem('dash_apiKey');
+        localStorage.removeItem('dash_authDomain');
+        localStorage.removeItem('dash_projectId');
+        localStorage.removeItem('dash_collectionName');
+
+        $('apiKey').value = '';
+        $('authDomain').value = '';
+        $('projectId').value = '';
+        $('collectionName').value = 'reports';
+
+        if(this.unsubscribe){
+          this.unsubscribe();
+          this.unsubscribe = null;
+        }
+
+        this.rawData = [];
+        this.renderAll();
+        this.setSync('err', 'تم حذف الإعدادات');
+        toast('🗑️ تم حذف إعدادات Firebase');
+      },
+
+      autoStartIfConfig(){
+        const apiKey = localStorage.getItem('dash_apiKey');
+        const authDomain = localStorage.getItem('dash_authDomain');
+        const projectId = localStorage.getItem('dash_projectId');
+
+        if(apiKey && authDomain && projectId){
+          this.start();
+        } else {
+          this.setSync('err', 'أدخل بيانات Firebase');
+        }
+      },
+
+      start(){
+        try{
+          const firebaseConfig = {
+            apiKey: localStorage.getItem('dash_apiKey'),
+            authDomain: localStorage.getItem('dash_authDomain'),
+            projectId: localStorage.getItem('dash_projectId')
+          };
+
+          if(!getApps().length){
+            this.app = initializeApp(firebaseConfig);
+          } else {
+            this.app = getApp();
+          }
+
+          this.db = getFirestore(this.app);
+          this.listenData();
+          toast('✅ تم تشغيل لوحة التحكم');
+        } catch(err){
+          console.error(err);
+          this.setSync('err', 'خطأ في Firebase');
+          toast('❌ صار خطأ بإعداد Firebase', 'err');
+        }
+      },
+
+      listenData(){
+        if(!this.db) return;
+
+        const collectionName = localStorage.getItem('dash_collectionName') || 'reports';
+
+        if(this.unsubscribe){
+          this.unsubscribe();
+          this.unsubscribe = null;
+        }
+
+        this.setSync('syncing', 'جاري الاتصال...');
+
+        const q = query(collection(this.db, collectionName));
+
+        this.unsubscribe = onSnapshot(q, (snapshot) => {
+          const rows = [];
+
+          snapshot.forEach((docSnap) => {
+            const d = docSnap.data() || {};
+            rows.push({
+              id: docSnap.id,
+              rep: d.rep || d.representative || d.salesRep || '',
+              region: d.region || d.city || '',
+              city: d.city || d.region || '',
+              amount: d.amount ?? d.amountSYP ?? 0,
+              amountSYP: d.amountSYP ?? d.amount ?? 0,
+              amountUSD: d.amountUSD ?? null,
+              exchangeRate: d.exchangeRate ?? d.rate ?? 0,
+              rate: d.rate ?? d.exchangeRate ?? 0,
+              date: d.date || '',
+              createdAt: d.createdAt || d.created_at || d.addedAt || d.timestamp || ''
+            });
+          });
+
+          this.rawData = rows;
+
+          this.rawData.sort((a, b) => {
+            const aTime = getCreatedTime(a);
+            const bTime = getCreatedTime(b);
+            return bTime - aTime;
+          });
+
+          this.renderAll();
+          this.setSync('ok', 'متصل ومحدث');
+        }, (error) => {
+          console.error(error);
+          this.setSync('err', 'فشل الاتصال');
+          toast('❌ ما قدر يجيب البيانات من Firestore', 'err');
+        });
+      },
+
+      refreshNow(){
+        if(this.unsubscribe){
+          this.listenData();
+        } else {
+          this.start();
+        }
+      },
+
+      setSync(state, text){
+        const dot = $('syncDot');
+        const txt = $('syncText');
+        dot.className = 'sync-dot ' + (state === 'ok' ? 'ok' : state === 'syncing' ? 'syncing' : 'err');
+        txt.textContent = text;
+      },
+
+      getFilteredData(){
+        const region = $('regionFilter').value;
+        const dateFrom = $('dateFrom').value;
+        const dateTo = $('dateTo').value;
+        const repSearch = $('repSearch').value.trim().toLowerCase();
+
+        let data = [...this.rawData];
+
+        if(region){
+          data = data.filter(item => normalizeRegion(item) === region);
+        }
+
+        if(dateFrom){
+          data = data.filter(item => (item.date || '') >= dateFrom);
+        }
+
+        if(dateTo){
+          data = data.filter(item => (item.date || '') <= dateTo);
+        }
+
+        if(repSearch){
+          data = data.filter(item => (item.rep || '').toLowerCase().includes(repSearch));
+        }
+
+        data.sort((a, b) => {
+          const aTime = getCreatedTime(a);
+          const bTime = getCreatedTime(b);
+          return bTime - aTime;
+        });
+
+        return data;
+      },
+
+      renderAll(){
+        const filtered = this.getFilteredData();
+        this.renderMainStats(filtered);
+        this.renderTodayRegionStats(filtered);
+        this.renderAllRegionStats(filtered);
+        this.renderRegionChart(filtered);
+        this.renderDailyChart(filtered);
+        this.renderHistoryTable(filtered);
+      },
+
+      renderMainStats(data){
+        const today = todayStr();
+
+        const totalSYP = data.reduce((sum, item) => sum + normalizeAmountSYP(item), 0);
+        const totalUSD = data.reduce((sum, item) => sum + normalizeAmountUSD(item), 0);
+
+        const todayData = data.filter(item => (item.date || '') === today);
+        const todaySYP = todayData.reduce((sum, item) => sum + normalizeAmountSYP(item), 0);
+        const todayCount = todayData.length;
+
+        $('mainStats').innerHTML = `
+          <div class="stat-card">
+            <div class="label">💰 إجمالي الإیرادات</div>
+            <div class="value">${fmtN(totalSYP)}</div>
+            <div class="sub">SYP</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="label">💵 إجمالي مكافئ الدولار</div>
+            <div class="value">${fmtN(totalUSD)}</div>
+            <div class="sub">USD</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="label">📅 إيراد اليوم</div>
+            <div class="value">${fmtN(todaySYP)}</div>
+            <div class="sub">SYP</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="label">🧾 عدد عمليات اليوم</div>
+            <div class="value">${fmtN(todayCount)}</div>
+            <div class="sub">عملية</div>
+          </div>
+        `;
+      },
+
+      renderTodayRegionStats(data){
+        const today = todayStr();
+
+        const html = REGIONS.map(region => {
+          const total = data
+            .filter(item => normalizeRegion(item) === region && (item.date || '') === today)
+            .reduce((sum, item) => sum + normalizeAmountSYP(item), 0);
+
+          return `
+            <div class="stat-card">
+              <div class="label">📍 ${region} اليوم</div>
+              <div class="value">${fmtN(total)}</div>
+              <div class="sub">SYP</div>
+            </div>
+          `;
+        }).join('');
+
+        $('todayRegionStats').innerHTML = html;
+      },
+
+      renderAllRegionStats(data){
+        const html = REGIONS.map(region => {
+          const total = data
+            .filter(item => normalizeRegion(item) === region)
+            .reduce((sum, item) => sum + normalizeAmountSYP(item), 0);
+
+          return `
+            <div class="stat-card">
+              <div class="label">📌 ${region}</div>
+              <div class="value">${fmtN(total)}</div>
+              <div class="sub">إجمالي SYP</div>
+            </div>
+          `;
+        }).join('');
+
+        $('allRegionStats').innerHTML = html;
+      },
+
+      renderRegionChart(data){
+        const labels = REGIONS;
+        const values = REGIONS.map(region => {
+          return data
+            .filter(item => normalizeRegion(item) === region)
+            .reduce((sum, item) => sum + normalizeAmountSYP(item), 0);
+        });
+
+        if(this.charts.region){
+          this.charts.region.destroy();
+        }
+
+        this.charts.region = new Chart($('regionChart'), {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [{
+              label: 'الإيراد حسب المنطقة',
+              data: values,
+              backgroundColor: COLORS,
+              borderRadius: 8
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#fff',
+                  font: { family: 'Cairo', size: 12 }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  color: 'rgba(255,255,255,.85)',
+                  font: { family: 'Cairo', size: 11 }
+                },
+                grid: {
+                  color: 'rgba(255,255,255,.08)'
+                }
+              },
+              y: {
+                ticks: {
+                  color: 'rgba(255,255,255,.85)',
+                  font: { family: 'Cairo', size: 11 }
+                },
+                grid: {
+                  color: 'rgba(255,255,255,.08)'
+                }
+              }
+            }
+          }
+        });
+      },
+
+      renderDailyChart(data){
+        const grouped = {};
+
+        data.forEach(item => {
+          const d = item.date || '';
+          if(!d) return;
+          if(!grouped[d]) grouped[d] = 0;
+          grouped[d] += normalizeAmountSYP(item);
+        });
+
+        const labels = Object.keys(grouped).sort((a,b) => new Date(a) - new Date(b));
+        const values = labels.map(date => grouped[date]);
+
+        if(this.charts.daily){
+          this.charts.daily.destroy();
+        }
+
+        this.charts.daily = new Chart($('dailyChart'), {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'الإيراد اليومي',
+              data: values,
+              borderColor: '#60a5fa',
+              backgroundColor: 'rgba(96,165,250,.18)',
+              fill: true,
+              tension: .35,
+              pointRadius: 3
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                labels: {
+                  color: '#fff',
+                  font: { family: 'Cairo', size: 12 }
+                }
+              }
+            },
+            scales: {
+              x: {
+                ticks: {
+                  color: 'rgba(255,255,255,.85)',
+                  font: { family: 'Cairo', size: 11 }
+                },
+                grid: {
+                  color: 'rgba(255,255,255,.08)'
+                }
+              },
+              y: {
+                ticks: {
+                  color: 'rgba(255,255,255,.85)',
+                  font: { family: 'Cairo', size: 11 }
+                },
+                grid: {
+                  color: 'rgba(255,255,255,.08)'
+                }
+              }
+            }
+          }
+        });
+      },
+
+      renderHistoryTable(data){
+        const tbody = $('historyTable');
+
+        if(!data.length){
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="empty">لا توجد بيانات حالياً</td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = data.map(item => {
+          return `
+            <tr>
+              <td>${item.rep || '-'}</td>
+              <td>${normalizeRegion(item) || '-'}</td>
+              <td>${fmtN(normalizeAmountSYP(item))}</td>
+              <td>${fmtN(normalizeExchangeRate(item))}</td>
+              <td>${fmtN(normalizeAmountUSD(item))}</td>
+              <td>${item.date ? formatDateOnly(item.date) : '-'}</td>
+              <td>${item.createdAt ? formatDateTime(item.createdAt) : '-'}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      Dashboard.init();
+    });
+  </script>
+</body>
+</html>
