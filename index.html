@@ -1,0 +1,218 @@
+<!doctype html>
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>لوحة التحكم - متتبع الإيراد</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;width:100%}
+body{font-family:'Cairo',sans-serif;overflow:hidden;color:#1a1a1a}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0d0221,#2d1b6b,#1a0a5c,#050d2e);background-size:400% 400%;animation:gs1 18s ease infinite;z-index:-2}
+@keyframes gs1{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(1.5px 1.5px at 15px 25px,rgba(200,180,255,.9),transparent),radial-gradient(1px 1px at 55px 65px,rgba(255,255,255,.8),transparent),radial-gradient(2px 2px at 120px 45px,rgba(180,200,255,.9),transparent),radial-gradient(1px 1px at 85px 110px,rgba(255,255,255,.7),transparent),radial-gradient(1.5px 1.5px at 200px 85px,rgba(200,180,255,.8),transparent),radial-gradient(1px 1px at 280px 130px,rgba(255,255,255,.9),transparent),radial-gradient(2px 2px at 350px 60px,rgba(180,220,255,.8),transparent),radial-gradient(1px 1px at 310px 190px,rgba(255,255,255,.6),transparent);background-repeat:repeat;background-size:380px 280px;animation:twinkle 6s ease-in-out infinite;opacity:.7;z-index:-1}
+@keyframes twinkle{0%,100%{opacity:.55}50%{opacity:1}}
+body.dark-mode{filter:brightness(.82) contrast(1.12)}
+.app{display:flex;height:100%;width:100%}
+.sidebar{width:250px;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border-left:1px solid rgba(255,255,255,.2);color:#fff;padding:18px;overflow-y:auto;flex-shrink:0}
+.sidebar-title{font-size:20px;font-weight:700;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid rgba(255,255,255,.25)}
+.side-note{font-size:12px;line-height:1.7;opacity:.82;margin-top:12px;background:rgba(255,255,255,.08);padding:12px;border-radius:10px}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.topbar{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.2);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-shrink:0}
+.topbar-left{display:flex;flex-direction:column;gap:3px}
+.topbar-title{font-size:15px;font-weight:700}
+.topbar-sub{font-size:11px;opacity:.8;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.topbar-actions{display:flex;gap:8px;flex-shrink:0}
+.sync-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+.sync-dot.ok{background:#48bb78}
+.sync-dot.syncing{background:#f6ad55;animation:pulse .8s infinite}
+.sync-dot.err{background:#fc8181}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.content{flex:1;overflow-y:auto;padding:18px;background:rgba(255,255,255,.04)}
+.content::-webkit-scrollbar{width:6px}
+.content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.3);border-radius:3px}
+.card{background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 6px 24px rgba(0,0,0,.12);color:#fff}
+.card h3{margin-bottom:14px;font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.stat{background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.22);padding:14px 10px;border-radius:11px;text-align:center;color:#fff}
+.stat .label{color:rgba(255,255,255,.75);font-size:11px;margin-bottom:6px;font-weight:600}
+.stat .value{font-size:18px;font-weight:700}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-box{position:relative;height:320px}
+.table-wrap{overflow-x:auto}
+.table{width:100%;border-collapse:collapse;margin-top:10px}
+.table th{background:rgba(255,255,255,.12);padding:10px 8px;text-align:right;color:#fff;font-weight:700;border-bottom:2px solid rgba(255,255,255,.2);font-size:13px;white-space:nowrap}
+.table td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,.1);color:#fff;font-size:13px}
+.table tr:hover{background:rgba(255,255,255,.06)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.filters>div{flex:1;min-width:140px}
+.filters label{display:block;color:#fff;font-size:12px;font-weight:600;margin-bottom:4px}
+.input,.select{width:100%;padding:10px;border:1px solid rgba(255,255,255,.3);border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font-family:'Cairo',sans-serif;font-size:13px}
+.select option,.input option{background:#1a1a4a}
+.btn{padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;transition:all .25s}
+.btn-primary{background:rgba(102,126,234,.6);color:#fff;border:1px solid rgba(102,126,234,.85)}
+.btn-secondary{background:rgba(113,128,150,.6);color:#fff;border:1px solid rgba(113,128,150,.85)}
+.btn:hover{transform:translateY(-1px)}
+.msg{position:fixed;top:16px;right:16px;z-index:10000}
+.msg div{padding:12px 16px;border-radius:8px;backdrop-filter:blur(8px);font-size:13px;margin-bottom:8px}
+.ok-msg{background:rgba(72,187,120,.32);border:1px solid rgba(72,187,120,.6);color:#a8e6a1}
+.err-msg{background:rgba(245,101,101,.32);border:1px solid rgba(245,101,101,.6);color:#ff9999}
+.hidden{display:none!important}
+@media (max-width: 900px){.sidebar{display:none}.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.content{padding:14px 12px 90px}.topbar{padding:10px 14px}.chart-box{height:250px}}
+</style>
+</head>
+<body>
+<div class="msg hidden" id="msgBox"></div>
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-title">📊 لوحة التحكم</div>
+    <div style="font-size:13px;line-height:1.8;opacity:.9">
+      هذه الصفحة مخصّصة للعرض فقط.<br>تعرض نفس البيانات التي يكتبها التطبيق الأساسي.
+    </div>
+    <div class="side-note">
+      إذا كان الربط عبر Firebase فالتحديث يكون عبر نفس collection. اليوم افتراضياً.
+    </div>
+  </div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-title">لوحة التحكم الرئيسية</div>
+        <div class="topbar-sub">
+          <span id="exchangeRateDisplay">1 USD = 0 SYP</span>
+          <span id="syncStatus" style="display:flex;align-items:center;gap:4px">
+            <span class="sync-dot ok" id="syncDot"></span>
+            <span id="syncText">جاهز</span>
+          </span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-secondary" onclick="Dashboard.refresh()">🔄 تحديث</button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="card">
+        <h3>⚙️ مصدر البيانات</h3>
+        <div class="filters">
+          <div>
+            <label>معرّف مشروع Firebase</label>
+            <input class="input" id="firebaseProject" placeholder="مثال: imad222">
+          </div>
+          <div>
+            <label>اسم المجموعة</label>
+            <input class="input" id="firebaseCollection" placeholder="مثال: revenues">
+          </div>
+          <div>
+            <label>تحديث تلقائي كل</label>
+            <select class="select" id="pollInterval">
+              <option value="5">5 ثواني</option>
+              <option value="10" selected>10 ثواني</option>
+              <option value="15">15 ثانية</option>
+            </select>
+          </div>
+          <div>
+            <label>الوضع الداكن</label>
+            <div style="padding-top:8px">
+              <label style="cursor:pointer;font-size:13px">
+                <input type="checkbox" id="darkMode"> تفعيل
+              </label>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="Dashboard.saveSettings()">💾 حفظ</button>
+          <button class="btn btn-secondary" onclick="Dashboard.loadFromLocal()">📦 جلب من localStorage</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🔎 الفلاتر</h3>
+        <div class="filters">
+          <div>
+            <label>المدينة</label>
+            <select id="cityFilter" class="select" onchange="Dashboard.renderAll()">
+              <option value="">كل المدن</option>
+              <option value="القامشلي">القامشلي</option>
+              <option value="الحسكة">الحسكة</option>
+              <option value="الرقة">الرقة</option>
+              <option value="الطبقة">الطبقة</option>
+              <option value="كوباني">كوباني</option>
+              <option value="منبج">منبج</option>
+            </select>
+          </div>
+          <div>
+            <label>من التاريخ</label>
+            <input type="date" class="input" id="dateFrom" onchange="Dashboard.renderAll()">
+          </div>
+          <div>
+            <label>إلى التاريخ</label>
+            <input type="date" class="input" id="dateTo" onchange="Dashboard.renderAll()">
+          </div>
+        </div>
+      </div>
+      <div class="stats" id="statsRow"></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>📍 حسب المدينة</h3>
+          <div class="chart-box"><canvas id="citiesChart"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>📈 الإيراد اليومي</h3>
+          <div class="chart-box"><canvas id="dailyChart"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📋 جدول التفاصيل</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>المدينة</th>
+                <th>SYP</th>
+                <th>USD</th>
+                <th>الصرف</th>
+                <th>التاريخ</th>
+                <th>الوصف</th>
+              </tr>
+            </thead>
+            <tbody id="historyTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+var CITIES=['القامشلي','الحسكة','الرقة','الطبقة','كوباني','منبج'];
+var COLORS=['#6366f1','#ec4899','#06b6d4','#10b981','#f59e0b','#ef4444'];
+var DEFAULT_RATE=1500;
+function $(id){return document.getElementById(id)}
+function fmtN(n){n=Number(n||0);return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function showMsg(txt,type){var box=$('msgBox');box.classList.remove('hidden');var d=document.createElement('div');d.className=type==='error'?'err-msg':'ok-msg';d.textContent=txt;box.appendChild(d);setTimeout(function(){d.remove();if(!box.children.length)box.classList.add('hidden')},2500);}
+function todayStr(){var t=new Date();return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
+var Dashboard={data:[],exchangeRate:DEFAULT_RATE,fbProject:'',fbCollection:'revenues',dark:false,timer:null,charts:{},
+init:function(){this.loadSettings();this.loadLocal();this.applyTheme();var today=todayStr();$('dateFrom').value=today;$('dateTo').value=today;this.updateRateDisplay();this.renderAll();this.startAutoSync();window.addEventListener('storage',function(e){if(e.key==='iData'||e.key==='iSettings'||e.key==='iRate'||e.key==='iDark'){Dashboard.loadSettings();Dashboard.loadLocal();Dashboard.applyTheme();Dashboard.renderAll();}});},
+loadSettings:function(){try{var s=localStorage.getItem('iSettings');if(s){var cfg=JSON.parse(s);this.fbProject=cfg.fbProject||'';this.fbCollection=cfg.fbCollection||'revenues';this.dark=!!cfg.darkMode;}var rate=localStorage.getItem('iRate');this.exchangeRate=rate?parseFloat(rate):DEFAULT_RATE;}catch(e){}if($('firebaseProject'))$('firebaseProject').value=this.fbProject;if($('firebaseCollection'))$('firebaseCollection').value=this.fbCollection;if($('darkMode'))$('darkMode').checked=this.dark;},
+saveSettings:function(){this.fbProject=$('firebaseProject').value.trim();this.fbCollection=$('firebaseCollection').value.trim()||'revenues';this.dark=$('darkMode').checked;localStorage.setItem('iSettings',JSON.stringify({fbProject:this.fbProject,fbCollection:this.fbCollection,fbEnabled:true,deletePin:'',darkMode:this.dark}));localStorage.setItem('iDark',String(this.dark));this.applyTheme();this.restartAutoSync();this.pullAll();showMsg('✅ تم حفظ الإعدادات');},
+applyTheme:function(){if(this.dark)document.body.classList.add('dark-mode');else document.body.classList.remove('dark-mode');},
+loadLocal:function(){try{var d=localStorage.getItem('iData');this.data=d?JSON.parse(d):[];}catch(e){this.data=[];}},
+loadFromLocal:function(){this.loadLocal();this.renderAll();showMsg('✅ تم تحميل البيانات من localStorage');},
+updateRateDisplay:function(){$('exchangeRateDisplay').textContent='1 USD = '+fmtN(this.exchangeRate.toFixed(0))+' SYP';},
+fbUrl:function(){if(!this.fbProject||!this.fbCollection)return '';return 'https://firestore.googleapis.com/v1/projects/'+this.fbProject+'/databases/(default)/documents/'+this.fbCollection;},
+pullAll:async function(){var url=this.fbUrl();if(!url){this.setSync('local','محلي');this.loadLocal();this.renderAll();return;}try{this.setSync('syncing','جاري التحديث...');var res=await fetch(url);if(!res.ok)throw new Error('fetch failed');var json=await res.json();var docs=json.documents||[];var remote=docs.map(function(doc){var f=doc.fields||{};function fv(k){var v=f[k];if(!v)return '';if(v.stringValue!==undefined)return v.stringValue;if(v.doubleValue!==undefined)return Number(v.doubleValue);if(v.integerValue!==undefined)return Number(v.integerValue);return '';}var id=doc.name.split('/').pop();return{id:id,city:fv('city'),amountSYP:Number(fv('amountSYP')||0),amountUSD:Number(fv('amountUSD')||0),description:fv('description'),date:fv('date'),exchangeRate:Number(fv('exchangeRate')||this.exchangeRate),createdAt:fv('createdAt')};},this);this.data=remote.length?remote:this.data;this.exchangeRate=remote.find(function(x){return x.exchangeRate;})?.exchangeRate||this.exchangeRate;localStorage.setItem('iData',JSON.stringify(this.data));localStorage.setItem('iRate',String(this.exchangeRate));this.updateRateDisplay();this.renderAll();this.setSync('ok','متزامن');}catch(e){this.loadLocal();this.renderAll();this.setSync('err','فشل الربط');}},
+setSync:function(state,text){var dot=$('syncDot'),txt=$('syncText');dot.className='sync-dot '+(state==='ok'?'ok':state==='syncing'?'syncing':'err');txt.textContent=text||(state==='ok'?'متزامن':state==='syncing'?'جاري...':state==='local'?'محلي':'خطأ');},
+startAutoSync:function(){var sec=parseInt($('pollInterval').value||'10',10);if(this.timer)clearInterval(this.timer);var self=this;this.timer=setInterval(function(){self.pullAll();},sec*1000);},
+restartAutoSync:function(){this.startAutoSync();},
+getFiltered:function(){var city=$('cityFilter').value;var df=$('dateFrom').value;var dt=$('dateTo').value;var f=this.data.slice();if(city)f=f.filter(function(d){return d.city===city;});if(df)f=f.filter(function(d){return d.date>=df;});if(dt)f=f.filter(function(d){return d.date<=dt;});return f;},
+renderStats:function(data){var todayByCities={};CITIES.forEach(function(c){todayByCities[c]=0;});var today=todayStr();data.filter(function(d){return d.date===today;}).forEach(function(d){todayByCities[d.city]=(todayByCities[d.city]||0)+(d.amountSYP||0);});var statsHtml='';CITIES.forEach(function(c){statsHtml+='<div class="stat"><div class="label">'+c+' اليوم</div><div class="value">'+fmtN(todayByCities[c].toFixed(0))+'</div></div>';});$('statsRow').innerHTML=statsHtml;},
+renderCharts:function(data){var cityVals=CITIES.map(function(c){return data.filter(function(d){return d.city===c;}).reduce(function(s,d){return s+(d.amountSYP||0);},0);});if(this.charts.cities)this.charts.cities.destroy();this.charts.cities=new Chart($('citiesChart'),{type:'doughnut',data:{labels:CITIES,datasets:[{data:cityVals,backgroundColor:COLORS,borderWidth:2,borderColor:'rgba(255,255,255,.2)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'white',font:{family:'Cairo',size:11},boxWidth:12}}}}});var byDate={};data.forEach(function(d){if(!byDate[d.date])byDate[d.date]={syp:0};byDate[d.date].syp+=(d.amountSYP||0);});var labels=Object.keys(byDate).sort();if(this.charts.daily)this.charts.daily.destroy();this.charts.daily=new Chart($('dailyChart'),{type:'line',data:{labels:labels,datasets:[{label:'SYP',data:labels.map(function(x){return byDate[x].syp;}),borderColor:'rgba(99,102,241,.9)',backgroundColor:'rgba(99,102,241,.12)',tension:.35,fill:true,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:'white',font:{family:'Cairo',size:11}}}},scales:{x:{ticks:{color:'rgba(255,255,255,.75)',font:{size:10}}},y:{ticks:{color:'rgba(255,255,255,.75)',font:{size:10}}}}}});},
+renderTable:function(data){data=data.slice().sort(function(a,b){return new Date(b.date)-new Date(a.date);});$('historyTable').innerHTML=data.map(function(item){return '<tr><td>'+item.city+'</td><td>'+fmtN((item.amountSYP||0).toFixed(0))+'</td><td>'+fmtN((item.amountUSD||0).toFixed(1))+'</td><td>'+fmtN((item.exchangeRate||0).toFixed(0))+'</td><td>'+item.date+'</td><td>'+(item.description||'-')+'</td></tr>';}).join('');if(!data.length){$('historyTable').innerHTML='<tr><td colspan="6" style="text-align:center;opacity:.7;padding:18px">لا توجد بيانات ضمن هذا الفلتر</td></tr>';}},
+renderAll:function(){var data=this.getFiltered();this.renderStats(data);this.renderCharts(data);this.renderTable(data);},
+refresh:function(){this.pullAll();}};
+$('pollInterval').addEventListener('change',function(){Dashboard.restartAutoSync();});
+$('darkMode').addEventListener('change',function(){Dashboard.dark=this.checked;Dashboard.applyTheme();localStorage.setItem('iDark',String(this.checked));});
+window.addEventListener('DOMContentLoaded',function(){Dashboard.init();});
+</script>
+</body>
+</html>
