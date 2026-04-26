@@ -84,13 +84,24 @@
       align-items:center;
     }
 
-    .top-actions,.quick-actions,.settings-actions,.days-strip,.mini-chips,.report-chips{
+    .top-actions,
+    .quick-actions,
+    .settings-actions,
+    .days-strip,
+    .mini-chips,
+    .report-chips{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
     }
 
-    .sync-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+    .sync-dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      display:inline-block;
+    }
+
     .sync-dot.ok{background:var(--success)}
     .sync-dot.syncing{background:var(--warn);animation:pulse 1s infinite}
     .sync-dot.err{background:var(--danger)}
@@ -127,7 +138,12 @@
       font-weight:800;
     }
 
-    .content{flex:1;overflow:auto;padding:18px}
+    .content{
+      flex:1;
+      overflow:auto;
+      padding:18px;
+    }
+
     .content::-webkit-scrollbar{width:8px}
     .content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:12px}
 
@@ -151,13 +167,29 @@
       flex-wrap:wrap;
     }
 
-    .card h3{font-size:18px;font-weight:900;margin-bottom:14px}
+    .card h3{
+      font-size:18px;
+      font-weight:900;
+      margin-bottom:14px;
+    }
+
     .card-head h3{margin-bottom:0}
 
-    .muted{color:var(--muted);font-size:12px;font-weight:700}
+    .muted{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+    }
+
     .hidden{display:none!important}
 
-    .filters,.new-grid,.stats-grid,.analysis-grid,.insight-grid,.grid-2,.report-grid{
+    .filters,
+    .new-grid,
+    .stats-grid,
+    .analysis-grid,
+    .insight-grid,
+    .grid-2,
+    .report-grid{
       display:grid;
       gap:12px;
     }
@@ -204,39 +236,62 @@
     .hero-alert.show{display:flex}
 
     .hero-alert .icon{
-      width:44px;height:44px;border-radius:14px;
-      display:grid;place-items:center;
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      display:grid;
+      place-items:center;
       font-size:22px;
       background:rgba(255,255,255,.12);
     }
 
-    .hero-alert .txt{line-height:1.6;font-size:15px;font-weight:800}
+    .hero-alert .txt{
+      line-height:1.6;
+      font-size:15px;
+      font-weight:800;
+    }
+
     .hero-alert .txt span{color:#bfdbfe}
 
-    .new-day-card,.insight,.leader-row{
+    .new-day-card,
+    .insight,
+    .leader-row{
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
       border-radius:18px;
       padding:14px;
     }
 
-    .new-day-head,.leader-top{
+    .new-day-head,
+    .leader-top{
       display:flex;
       justify-content:space-between;
       gap:10px;
       align-items:flex-start;
     }
 
-    .new-day-date,.stat .value,.insight .v,.report-mini .t2{font-weight:900}
+    .new-day-date,
+    .stat .value,
+    .insight .v,
+    .report-mini .t2{
+      font-weight:900;
+    }
+
     .new-day-date{font-size:17px}
 
-    .new-day-sub,.stat .sub,.report-mini .t1{
+    .new-day-sub,
+    .stat .sub,
+    .report-mini .t1{
       color:var(--muted);
       font-size:12px;
       font-weight:700;
     }
 
-    .new-day-total{text-align:left;font-size:18px;font-weight:900}
+    .new-day-total{
+      text-align:left;
+      font-size:18px;
+      font-weight:900;
+    }
 
     .chip,.day-pill,.report-chip{
       padding:7px 10px;
@@ -247,7 +302,8 @@
       font-weight:800;
     }
 
-    .stat .label,.insight .k{
+    .stat .label,
+    .insight .k{
       font-size:12px;
       color:var(--muted);
       font-weight:800;
@@ -255,7 +311,12 @@
     }
 
     .leaderboard{display:flex;flex-direction:column;gap:10px}
-    .leader-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+    .leader-name{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
 
     .leader-bar{
       height:9px;
@@ -271,7 +332,10 @@
       background:linear-gradient(90deg,#38bdf8,#8b5cf6);
     }
 
-    .chart-wrap{height:330px;position:relative}
+    .chart-wrap{
+      height:330px;
+      position:relative;
+    }
 
     .table-wrap{
       overflow:auto;
@@ -279,7 +343,11 @@
       border:1px solid rgba(255,255,255,.10);
     }
 
-    table{width:100%;border-collapse:collapse;min-width:980px}
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:980px;
+    }
 
     th,td{
       padding:11px 10px;
@@ -322,8 +390,17 @@
       animation:toastIn .2s ease;
     }
 
-    .toast.ok{background:rgba(25,195,125,.18);border:1px solid rgba(25,195,125,.45);color:#d1fae5}
-    .toast.err{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.42);color:#fee2e2}
+    .toast.ok{
+      background:rgba(25,195,125,.18);
+      border:1px solid rgba(25,195,125,.45);
+      color:#d1fae5;
+    }
+
+    .toast.err{
+      background:rgba(239,68,68,.18);
+      border:1px solid rgba(239,68,68,.42);
+      color:#fee2e2;
+    }
 
     #reportRender{
       position:fixed;
@@ -344,8 +421,18 @@
       page-break-after:always;
     }
 
-    .report-title{font-size:28px;font-weight:900;margin-bottom:10px;color:#0f172a}
-    .report-sub{font-size:13px;color:#475569;margin-bottom:14px}
+    .report-title{
+      font-size:28px;
+      font-weight:900;
+      margin-bottom:10px;
+      color:#0f172a;
+    }
+
+    .report-sub{
+      font-size:13px;
+      color:#475569;
+      margin-bottom:14px;
+    }
 
     .report-box,.report-mini{
       border:1px solid #dbeafe;
@@ -355,13 +442,32 @@
       margin-bottom:14px;
     }
 
-    .report-mini{background:#fff;margin-bottom:0}
-    .report-chip{background:#eef6ff;border-color:#dbeafe;color:#1e3a8a}
-    .report-section-title{font-size:18px;font-weight:900;margin-bottom:10px;color:#0f172a}
+    .report-mini{
+      background:#fff;
+      margin-bottom:0;
+    }
 
-    .report-table{width:100%;border-collapse:collapse;min-width:100%}
+    .report-chip{
+      background:#eef6ff;
+      border-color:#dbeafe;
+      color:#1e3a8a;
+    }
 
-    .report-table th,.report-table td{
+    .report-section-title{
+      font-size:18px;
+      font-weight:900;
+      margin-bottom:10px;
+      color:#0f172a;
+    }
+
+    .report-table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:100%;
+    }
+
+    .report-table th,
+    .report-table td{
       border:1px solid #dbeafe;
       padding:8px;
       font-size:12px;
@@ -393,6 +499,7 @@
         <h1>💎 لوحة التحكم الذكية للإيرادات</h1>
         <div class="sub">
           <span id="todayText">اليوم: -</span>
+          <span id="sourceText">المصدر: -</span>
           <span id="lastSyncText">آخر تحديث: -</span>
           <span style="display:flex;align-items:center;gap:6px">
             <span class="sync-dot syncing" id="syncDot"></span>
@@ -419,7 +526,7 @@
         <h3>⚙️ إعدادات Firebase</h3>
 
         <div class="muted" style="margin-bottom:12px">
-          بيانات Firebase الأساسية محفوظة داخل الكود. غير فقط Project ID و Collection إذا احتجت.
+          هذه اللوحة تقرأ من نفس برنامج الإضافة: إذا كتبت Collection Name = imad فهي تقرأ من imad_data.
         </div>
 
         <div class="filters">
@@ -430,7 +537,7 @@
 
           <div class="field">
             <label>Collection Name</label>
-            <input id="collectionName" class="input" type="text" placeholder="reports">
+            <input id="collectionName" class="input" type="text" placeholder="imad">
           </div>
         </div>
 
@@ -448,9 +555,9 @@
 
         <div class="filters">
           <div class="field">
-            <label>المنطقة</label>
+            <label>المجموعة</label>
             <select id="regionFilter" class="select" onchange="Dashboard.renderAll()">
-              <option value="">كل المناطق</option>
+              <option value="">كل المجموعات</option>
               <option value="Region 1">Region 1</option>
               <option value="Region 2">Region 2</option>
               <option value="Region 3">Region 3</option>
@@ -469,8 +576,8 @@
           </div>
 
           <div class="field">
-            <label>بحث باسم المندوب</label>
-            <input id="repSearch" class="input" type="text" list="repSuggestions" placeholder="اكتب اسم المندوب" oninput="Dashboard.renderAll()">
+            <label>بحث بالاسم</label>
+            <input id="repSearch" class="input" type="text" list="repSuggestions" placeholder="Region 1 أو ccbs1" oninput="Dashboard.renderAll()">
             <datalist id="repSuggestions"></datalist>
           </div>
 
@@ -498,7 +605,7 @@
           <button class="chip-btn" onclick="Dashboard.clearFilters()">مسح الفلاتر</button>
         </div>
 
-        <div class="muted" style="margin-top:14px">اختيار سريع للمندوبين</div>
+        <div class="muted" style="margin-top:14px">اختيار سريع للأسماء</div>
         <div class="quick-actions" id="repQuickActions"></div>
       </div>
 
@@ -517,7 +624,7 @@
 
         <div class="card">
           <div class="card-head">
-            <h3>🏆 أفضل المندوبين</h3>
+            <h3>🏆 أفضل الأسماء</h3>
             <div class="muted" id="leadersMeta">بحسب الفلاتر الحالية</div>
           </div>
           <div class="leaderboard" id="topReps"></div>
@@ -536,7 +643,7 @@
         </div>
 
         <div class="card">
-          <h3>📊 الإيراد حسب المنطقة</h3>
+          <h3>📊 الإيراد حسب المجموعة</h3>
           <div class="chart-wrap"><canvas id="regionChart"></canvas></div>
         </div>
       </div>
@@ -551,14 +658,14 @@
           <table>
             <thead>
               <tr>
-                <th>المندوب</th>
-                <th>المنطقة</th>
+                <th>الاسم</th>
+                <th>المجموعة</th>
                 <th>المبلغ SYP</th>
                 <th>سعر الصرف</th>
                 <th>إيراد الدولار</th>
                 <th>تاريخ الإيراد</th>
                 <th>وقت الإضافة</th>
-                <th>ملاحظة</th>
+                <th>الوصف</th>
               </tr>
             </thead>
             <tbody id="historyTable"></tbody>
@@ -581,19 +688,34 @@
       projectId: "imad222",
       storageBucket: "imad222.firebasestorage.app",
       messagingSenderId: "916772184467",
-      appId: "1:916772184467:web:ca6241479b200b61638866",
-      measurementId: "G-5XSME9XX61",
-      collectionName: "reports"
+      appId: "1:916772184467:web:5679a426e5bdbc82638866",
+      measurementId: "G-4P65YVN10S",
+      collectionName: "imad"
     };
 
     const REGIONS = ['Region 1','Region 2','Region 3','Region 4'];
 
-    const REPRESENTATIVES = [
+    const NAMES = [
+      'Region 1',
+      'Region 2',
+      'Region 3',
+      'Region 4',
       'ccbs1',
       'ccbs2',
       'ccbs3',
       'ccbs4'
     ];
+
+    const NAME_TO_REGION = {
+      'Region 1':'Region 1',
+      'Region 2':'Region 2',
+      'Region 3':'Region 3',
+      'Region 4':'Region 4',
+      'ccbs1':'Region 1',
+      'ccbs2':'Region 2',
+      'ccbs3':'Region 3',
+      'ccbs4':'Region 4'
+    };
 
     const $ = id => document.getElementById(id);
 
@@ -618,13 +740,25 @@
       return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-01`;
     };
 
-    const formatDateOnly = v => {
+    const displayDate = v => {
       if(!v) return '-';
+
+      const s = String(v);
+
+      if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
+        const [y,m,d] = s.split('-');
+        return `${d}/${m}/${y}`;
+      }
+
+      if(v && typeof v.toDate === 'function'){
+        v = v.toDate();
+      }
+
       const d = new Date(v);
-      return Number.isNaN(d.getTime()) ? v : d.toLocaleDateString('ar-SY');
+      return Number.isNaN(d.getTime()) ? s : d.toLocaleDateString('ar-SY');
     };
 
-    const formatDateTime = v => {
+    const displayDateTime = v => {
       if(!v) return '-';
 
       if(v && typeof v.toDate === 'function'){
@@ -642,26 +776,36 @@
       });
     };
 
-    const normalizeRep = item => item.rep || item.representative || item.salesRep || item.name || '';
-    const normalizeRegion = item => item.region || item.city || item.area || '';
+    const normalizeName = item => item.name || item.rep || item.representative || item.salesRep || '';
+    const normalizeRegion = item => item.region || item.group || NAME_TO_REGION[normalizeName(item)] || normalizeName(item) || 'غير محدد';
 
     const normalizeAmountSYP = item => {
       if(item.amountSYP != null) return Number(item.amountSYP) || 0;
+      if(item.amount_syp != null) return Number(item.amount_syp) || 0;
       if(item.syp != null) return Number(item.syp) || 0;
       if(item.amount != null) return Number(item.amount) || 0;
       return 0;
     };
 
-    const normalizeExchangeRate = item => Number(item.exchangeRate || item.rate || item.exchange || 0) || 0;
-
     const normalizeAmountUSD = item => {
       if(item.amountUSD != null) return Number(item.amountUSD) || 0;
+      if(item.amount_usd != null) return Number(item.amount_usd) || 0;
       if(item.usd != null) return Number(item.usd) || 0;
-      return normalizeExchangeRate(item) > 0 ? normalizeAmountSYP(item) / normalizeExchangeRate(item) : 0;
+
+      const rate = normalizeExchangeRate(item);
+      return rate > 0 ? normalizeAmountSYP(item) / rate : 0;
     };
 
+    const normalizeExchangeRate = item => {
+      return Number(item.exchangeRate || item.exchange_rate || item.rate || item.exchange || 0) || 0;
+    };
+
+    const getDateValue = item => item.date || item.day || '';
+
+    const getCreatedValue = item => item.createdAt || item.created_at || item.addedAt || item.timestamp || item.date || '';
+
     const getCreatedTime = item => {
-      const v = item.createdAt || item.created_at || item.addedAt || item.timestamp || item.date || 0;
+      const v = getCreatedValue(item);
 
       if(v && typeof v.toDate === 'function'){
         return v.toDate().getTime();
@@ -699,17 +843,17 @@
     },{});
 
     const groupByDate = rows => rows.reduce((m,r)=>{
-      const d = r.date || 'بدون تاريخ';
+      const d = getDateValue(r) || 'بدون تاريخ';
       (m[d] || (m[d] = [])).push(r);
       return m;
     },{});
 
     const reportFilters = () => {
       const parts = [];
-      if($('regionFilter').value) parts.push('المنطقة: ' + $('regionFilter').value);
-      if($('dateFrom').value) parts.push('من: ' + formatDateOnly($('dateFrom').value));
-      if($('dateTo').value) parts.push('إلى: ' + formatDateOnly($('dateTo').value));
-      if($('repSearch').value.trim()) parts.push('المندوب: ' + $('repSearch').value.trim());
+      if($('regionFilter').value) parts.push('المجموعة: ' + $('regionFilter').value);
+      if($('dateFrom').value) parts.push('من: ' + displayDate($('dateFrom').value));
+      if($('dateTo').value) parts.push('إلى: ' + displayDate($('dateTo').value));
+      if($('repSearch').value.trim()) parts.push('الاسم: ' + $('repSearch').value.trim());
       if(($('minAmount').value || '').trim()) parts.push('أقل مبلغ: ' + fmtN($('minAmount').value) + ' SYP');
       return parts.length ? parts : ['بدون فلاتر'];
     };
@@ -717,26 +861,28 @@
     window.Dashboard = {
       app:null,
       db:null,
-      unsubscribe:null,
+      unsubscribeData:null,
+      unsubscribeRates:null,
       rawData:[],
       recentAddedRows:[],
+      exchangeRates:{},
       charts:{date:null,region:null},
 
       init(){
-        $('todayText').textContent = 'اليوم: ' + formatDateOnly(todayStr());
-        this.initRepresentativeOptions();
+        $('todayText').textContent = 'اليوم: ' + displayDate(todayStr());
+        this.initNameOptions();
         this.loadConfigToInputs();
         this.autoStartIfConfig();
       },
 
-      initRepresentativeOptions(){
-        $('repSuggestions').innerHTML = REPRESENTATIVES
+      initNameOptions(){
+        $('repSuggestions').innerHTML = NAMES
           .map(name=>`<option value="${esc(name)}"></option>`)
           .join('');
 
         $('repQuickActions').innerHTML = [
-          `<button class="chip-btn" onclick="Dashboard.setRepSearch('')">كل المندوبين</button>`,
-          ...REPRESENTATIVES.map(name=>`<button class="chip-btn" onclick="Dashboard.setRepSearch('${name}')">${esc(name)}</button>`)
+          `<button class="chip-btn" onclick="Dashboard.setRepSearch('')">كل الأسماء</button>`,
+          ...NAMES.map(name=>`<button class="chip-btn" onclick="Dashboard.setRepSearch('${name}')">${esc(name)}</button>`)
         ].join('');
       },
 
@@ -747,7 +893,7 @@
 
       loadConfigToInputs(){
         $('projectId').value = localStorage.getItem('dash_projectId') || FIREBASE_PRESET.projectId || '';
-        $('collectionName').value = localStorage.getItem('dash_collectionName') || FIREBASE_PRESET.collectionName || 'reports';
+        $('collectionName').value = localStorage.getItem('dash_collectionName') || FIREBASE_PRESET.collectionName || 'imad';
       },
 
       toggleSettings(){
@@ -760,7 +906,7 @@
       },
 
       updateLastSyncLabel(){
-        $('lastSyncText').textContent = 'آخر تحديث: ' + formatDateTime(new Date());
+        $('lastSyncText').textContent = 'آخر تحديث: ' + displayDateTime(new Date());
       },
 
       getProjectId(){
@@ -770,16 +916,24 @@
           || '';
       },
 
-      getCollectionName(){
+      getBaseCollectionName(){
         return $('collectionName')?.value?.trim()
           || localStorage.getItem('dash_collectionName')
           || FIREBASE_PRESET.collectionName
-          || 'reports';
+          || 'imad';
+      },
+
+      getDataCollectionName(){
+        return this.getBaseCollectionName() + '_data';
+      },
+
+      getRatesCollectionName(){
+        return this.getBaseCollectionName() + '_exchange_rates';
       },
 
       saveConfigAndStart(){
         const projectId = $('projectId').value.trim();
-        const collectionName = $('collectionName').value.trim() || 'reports';
+        const collectionName = $('collectionName').value.trim() || 'imad';
 
         if(!projectId){
           toast('عبي Project ID', 'err');
@@ -795,16 +949,22 @@
       clearConfig(){
         ['dash_projectId','dash_collectionName','dash_last_seen_created'].forEach(k=>localStorage.removeItem(k));
 
-        $('projectId').value = FIREBASE_PRESET.projectId || '';
-        $('collectionName').value = FIREBASE_PRESET.collectionName || 'reports';
+        $('projectId').value = FIREBASE_PRESET.projectId || 'imad222';
+        $('collectionName').value = FIREBASE_PRESET.collectionName || 'imad';
 
-        if(this.unsubscribe){
-          this.unsubscribe();
-          this.unsubscribe = null;
+        if(this.unsubscribeData){
+          this.unsubscribeData();
+          this.unsubscribeData = null;
+        }
+
+        if(this.unsubscribeRates){
+          this.unsubscribeRates();
+          this.unsubscribeRates = null;
         }
 
         this.rawData = [];
         this.recentAddedRows = [];
+        this.exchangeRates = {};
         this.renderAll();
         this.setSync('err','تم حذف الإعدادات');
         toast('تم حذف الإعدادات');
@@ -840,6 +1000,8 @@
           this.app = getApps().length ? getApp() : initializeApp(firebaseConfig);
           this.db = getFirestore(this.app);
           this.listenData();
+          this.listenRates();
+
           toast('تم تشغيل لوحة التحكم');
         }catch(err){
           console.error(err);
@@ -851,16 +1013,17 @@
       listenData(){
         if(!this.db) return;
 
-        const collectionName = this.getCollectionName();
+        const collectionName = this.getDataCollectionName();
+        $('sourceText').textContent = 'المصدر: ' + collectionName;
 
-        if(this.unsubscribe){
-          this.unsubscribe();
-          this.unsubscribe = null;
+        if(this.unsubscribeData){
+          this.unsubscribeData();
+          this.unsubscribeData = null;
         }
 
         this.setSync('syncing','جاري الاتصال...');
 
-        this.unsubscribe = onSnapshot(
+        this.unsubscribeData = onSnapshot(
           query(collection(this.db, collectionName)),
           snapshot => {
             const rows = [];
@@ -870,17 +1033,20 @@
 
               rows.push({
                 id:docSnap.id,
-                rep:d.rep || d.representative || d.salesRep || d.name || '',
-                region:d.region || d.city || d.area || '',
-                city:d.city || d.region || d.area || '',
-                amount:d.amount ?? d.amountSYP ?? d.syp ?? 0,
-                amountSYP:d.amountSYP ?? d.syp ?? d.amount ?? 0,
-                amountUSD:d.amountUSD ?? d.usd ?? null,
-                exchangeRate:d.exchangeRate ?? d.rate ?? d.exchange ?? 0,
-                rate:d.rate ?? d.exchangeRate ?? d.exchange ?? 0,
+
+                name:d.name || d.rep || d.representative || d.salesRep || '',
+                region:d.region || d.group || '',
+                group:d.group || d.region || '',
+
+                amount_syp:d.amount_syp ?? d.amountSYP ?? d.syp ?? d.amount ?? 0,
+                amount_usd:d.amount_usd ?? d.amountUSD ?? d.usd ?? null,
+                exchange_rate:d.exchange_rate ?? d.exchangeRate ?? d.rate ?? d.exchange ?? 0,
+
                 date:d.date || d.day || '',
-                note:d.note || d.notes || '',
-                createdAt:d.createdAt || d.created_at || d.addedAt || d.timestamp || d.date || ''
+                description:d.description || d.note || d.notes || '',
+                note:d.note || d.description || d.notes || '',
+
+                created_at:d.created_at || d.createdAt || d.addedAt || d.timestamp || d.date || ''
               });
             });
 
@@ -898,7 +1064,35 @@
           error => {
             console.error(error);
             this.setSync('err','فشل الاتصال');
-            toast('ما قدر يجيب البيانات من Firestore','err');
+            toast('ما قدر يجيب البيانات من ' + collectionName,'err');
+          }
+        );
+      },
+
+      listenRates(){
+        if(!this.db) return;
+
+        const ratesCol = this.getRatesCollectionName();
+
+        if(this.unsubscribeRates){
+          this.unsubscribeRates();
+          this.unsubscribeRates = null;
+        }
+
+        this.unsubscribeRates = onSnapshot(
+          query(collection(this.db, ratesCol)),
+          snapshot => {
+            const map = {};
+            snapshot.forEach(docSnap=>{
+              const d = docSnap.data() || {};
+              if(d.date && d.rate != null){
+                map[d.date] = Number(d.rate) || 0;
+              }
+            });
+            this.exchangeRates = map;
+          },
+          error => {
+            console.warn('Rates listener error:', error);
           }
         );
       },
@@ -914,8 +1108,8 @@
       },
 
       refreshNow(){
-        if(this.unsubscribe) this.listenData();
-        else this.start();
+        this.listenData();
+        this.listenRates();
       },
 
       applyQuickRange(mode){
@@ -965,9 +1159,9 @@
         const sortBy = $('sortBy').value;
 
         if(region) data = data.filter(r=>normalizeRegion(r) === region);
-        if(from) data = data.filter(r=>(r.date || '') >= from);
-        if(to) data = data.filter(r=>(r.date || '') <= to);
-        if(repSearch) data = data.filter(r=>normalizeRep(r).toLowerCase().includes(repSearch));
+        if(from) data = data.filter(r=>(getDateValue(r) || '') >= from);
+        if(to) data = data.filter(r=>(getDateValue(r) || '') <= to);
+        if(repSearch) data = data.filter(r=>normalizeName(r).toLowerCase().includes(repSearch));
         if(minAmount > 0) data = data.filter(r=>normalizeAmountSYP(r) >= minAmount);
 
         data.sort((a,b)=>{
@@ -985,7 +1179,7 @@
 
         this.renderOverview(filtered);
         this.renderInsights(filtered);
-        this.renderRepLeaderboard(filtered);
+        this.renderNameLeaderboard(filtered);
         this.renderDaysStrip(filtered);
         this.renderRecentAddedCards();
         this.renderDateChart(filtered);
@@ -1003,9 +1197,9 @@
           return;
         }
 
-        const dates = [...new Set(rows.map(r=>r.date).filter(Boolean))];
+        const dates = [...new Set(rows.map(r=>getDateValue(r)).filter(Boolean))];
 
-        text.innerHTML = `تمت إضافة <span>إيرادات جديدة</span> لتواريخ: <span>${dates.map(formatDateOnly).join(' ، ')}</span>`;
+        text.innerHTML = `تمت إضافة <span>إيرادات جديدة</span> لتواريخ: <span>${dates.map(displayDate).join(' ، ')}</span>`;
         alert.classList.add('show');
       },
 
@@ -1025,17 +1219,17 @@
           const rows = byDate[date];
           const totalSYP = rows.reduce((s,r)=>s+normalizeAmountSYP(r),0);
           const totalUSD = rows.reduce((s,r)=>s+normalizeAmountUSD(r),0);
-          const regionTotals = groupBy(rows,r=>normalizeRegion(r)||'غير محدد',r=>normalizeAmountSYP(r));
+          const nameTotals = groupBy(rows,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r));
 
-          const chips = Object.entries(regionTotals)
-            .map(([reg,val])=>`<span class="chip">${esc(reg)}: ${fmtN(val)} SYP</span>`)
+          const chips = Object.entries(nameTotals)
+            .map(([name,val])=>`<span class="chip">${esc(name)}: ${fmtN(val)} SYP</span>`)
             .join('');
 
           return `
             <div class="new-day-card">
               <div class="new-day-head">
                 <div>
-                  <div class="new-day-date">إيراد مضاف لتاريخ ${formatDateOnly(date)}</div>
+                  <div class="new-day-date">إيراد مضاف لتاريخ ${displayDate(date)}</div>
                   <div class="new-day-sub">${rows.length} عملية مضافة حديثًا</div>
                 </div>
                 <div class="new-day-total">
@@ -1043,7 +1237,7 @@
                   <div class="new-day-sub">SYP / ${fmtN(totalUSD)} USD</div>
                 </div>
               </div>
-              <div class="mini-chips">${chips || '<span class="chip">لا توجد مناطق</span>'}</div>
+              <div class="mini-chips">${chips || '<span class="chip">لا توجد أسماء</span>'}</div>
             </div>
           `;
         }).join('');
@@ -1053,25 +1247,54 @@
         const totalSYP = data.reduce((s,r)=>s+normalizeAmountSYP(r),0);
         const totalUSD = data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
-        const allDates = [...new Set(data.map(r=>r.date).filter(Boolean))]
+        const allDates = [...new Set(data.map(r=>getDateValue(r)).filter(Boolean))]
           .sort((a,b)=>new Date(b)-new Date(a));
 
         const regionTotals = Object.entries(groupBy(data,r=>normalizeRegion(r)||'غير محدد',r=>normalizeAmountSYP(r)))
           .sort((a,b)=>b[1]-a[1]);
 
-        const repTotals = Object.entries(groupBy(data,r=>normalizeRep(r)||'غير محدد',r=>normalizeAmountSYP(r)))
+        const nameTotals = Object.entries(groupBy(data,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
           .sort((a,b)=>b[1]-a[1]);
 
         const topRegion = regionTotals[0];
-        const topRep = repTotals[0];
+        const topName = nameTotals[0];
 
         $('overviewStats').innerHTML = `
-          <div class="stat"><div class="label">إجمالي الإيراد</div><div class="value">${fmtN(totalSYP)}</div><div class="sub">SYP</div></div>
-          <div class="stat"><div class="label">إيراد الدولار</div><div class="value">${fmtN(totalUSD)}</div><div class="sub">USD</div></div>
-          <div class="stat"><div class="label">عدد العمليات</div><div class="value">${fmtN(data.length)}</div><div class="sub">عملية</div></div>
-          <div class="stat"><div class="label">عدد أيام الإيراد</div><div class="value">${fmtN(allDates.length)}</div><div class="sub">يوم مختلف</div></div>
-          <div class="stat"><div class="label">أعلى منطقة</div><div class="value">${esc(topRegion ? topRegion[0] : '-')}</div><div class="sub">${topRegion ? fmtN(topRegion[1]) + ' SYP' : 'لا توجد بيانات'}</div></div>
-          <div class="stat"><div class="label">أعلى مندوب</div><div class="value">${esc(topRep ? topRep[0] : '-')}</div><div class="sub">${topRep ? fmtN(topRep[1]) + ' SYP' : 'لا توجد بيانات'}</div></div>
+          <div class="stat">
+            <div class="label">إجمالي الإيراد</div>
+            <div class="value">${fmtN(totalSYP)}</div>
+            <div class="sub">SYP</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">إيراد الدولار</div>
+            <div class="value">${fmtN(totalUSD)}</div>
+            <div class="sub">USD</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">عدد العمليات</div>
+            <div class="value">${fmtN(data.length)}</div>
+            <div class="sub">عملية</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">عدد أيام الإيراد</div>
+            <div class="value">${fmtN(allDates.length)}</div>
+            <div class="sub">يوم مختلف</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">أعلى مجموعة</div>
+            <div class="value">${esc(topRegion ? topRegion[0] : '-')}</div>
+            <div class="sub">${topRegion ? fmtN(topRegion[1]) + ' SYP' : 'لا توجد بيانات'}</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">أعلى اسم</div>
+            <div class="value">${esc(topName ? topName[0] : '-')}</div>
+            <div class="sub">${topName ? fmtN(topName[1]) + ' SYP' : 'لا توجد بيانات'}</div>
+          </div>
         `;
       },
 
@@ -1092,30 +1315,49 @@
           }))
           .sort((a,b)=>b.total-a.total)[0];
 
-        const datesCount = new Set(data.map(r=>r.date).filter(Boolean)).size || 1;
+        const datesCount = new Set(data.map(r=>getDateValue(r)).filter(Boolean)).size || 1;
         const avgDaily = data.reduce((s,r)=>s+normalizeAmountSYP(r),0) / datesCount;
         const avgTicket = data.reduce((s,r)=>s+normalizeAmountSYP(r),0) / data.length;
         const latest = [...data].sort((a,b)=>getCreatedTime(b)-getCreatedTime(a))[0];
 
         target.innerHTML = `
-          <div class="insight"><div class="k">أفضل يوم</div><div class="v">${bestDay ? formatDateOnly(bestDay.date) : '-'}</div><div class="muted">${bestDay ? fmtN(bestDay.total) + ' SYP' : 'لا توجد بيانات'}</div></div>
-          <div class="insight"><div class="k">المتوسط اليومي</div><div class="v">${fmtN(avgDaily)}</div><div class="muted">SYP</div></div>
-          <div class="insight"><div class="k">متوسط العملية</div><div class="v">${fmtN(avgTicket)}</div><div class="muted">SYP لكل عملية</div></div>
-          <div class="insight"><div class="k">آخر عملية مضافة</div><div class="v">${esc(normalizeRep(latest)||'بدون اسم')}</div><div class="muted">${formatDateTime(latest.createdAt || latest.date)}</div></div>
+          <div class="insight">
+            <div class="k">أفضل يوم</div>
+            <div class="v">${bestDay ? displayDate(bestDay.date) : '-'}</div>
+            <div class="muted">${bestDay ? fmtN(bestDay.total) + ' SYP' : 'لا توجد بيانات'}</div>
+          </div>
+
+          <div class="insight">
+            <div class="k">المتوسط اليومي</div>
+            <div class="v">${fmtN(avgDaily)}</div>
+            <div class="muted">SYP</div>
+          </div>
+
+          <div class="insight">
+            <div class="k">متوسط العملية</div>
+            <div class="v">${fmtN(avgTicket)}</div>
+            <div class="muted">SYP لكل عملية</div>
+          </div>
+
+          <div class="insight">
+            <div class="k">آخر عملية مضافة</div>
+            <div class="v">${esc(normalizeName(latest)||'بدون اسم')}</div>
+            <div class="muted">${displayDateTime(getCreatedValue(latest))}</div>
+          </div>
         `;
       },
 
-      renderRepLeaderboard(data){
+      renderNameLeaderboard(data){
         const target = $('topReps');
 
-        const leaders = Object.entries(groupBy(data,r=>normalizeRep(r)||'غير محدد',r=>normalizeAmountSYP(r)))
+        const leaders = Object.entries(groupBy(data,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
           .sort((a,b)=>b[1]-a[1])
-          .slice(0,5);
+          .slice(0,8);
 
-        $('leadersMeta').textContent = leaders.length ? `أعلى ${leaders.length} مندوبين` : 'بحسب الفلاتر الحالية';
+        $('leadersMeta').textContent = leaders.length ? `أعلى ${leaders.length} أسماء` : 'بحسب الفلاتر الحالية';
 
         if(!leaders.length){
-          target.innerHTML = '<div class="empty">لا توجد بيانات للمندوبين.</div>';
+          target.innerHTML = '<div class="empty">لا توجد بيانات للأسماء.</div>';
           return;
         }
 
@@ -1133,16 +1375,16 @@
       },
 
       renderDaysStrip(data){
-        const allDates = [...new Set(data.map(r=>r.date).filter(Boolean))]
+        const allDates = [...new Set(data.map(r=>getDateValue(r)).filter(Boolean))]
           .sort((a,b)=>new Date(b)-new Date(a));
 
         $('allDaysStrip').innerHTML = allDates.length
-          ? allDates.map(d=>`<span class="day-pill">${formatDateOnly(d)}</span>`).join('')
+          ? allDates.map(d=>`<span class="day-pill">${displayDate(d)}</span>`).join('')
           : '<div class="empty" style="padding:0">لا توجد تواريخ حالياً.</div>';
       },
 
       renderDateChart(data){
-        const grouped = groupBy(data,r=>r.date||'بدون تاريخ',r=>normalizeAmountSYP(r));
+        const grouped = groupBy(data,r=>getDateValue(r)||'بدون تاريخ',r=>normalizeAmountSYP(r));
         const labels = Object.keys(grouped).sort((a,b)=>new Date(a)-new Date(b));
         const values = labels.map(k=>grouped[k]);
 
@@ -1151,7 +1393,7 @@
         this.charts.date = new Chart($('dateChart'),{
           type:'line',
           data:{
-            labels:labels.map(formatDateOnly),
+            labels:labels.map(displayDate),
             datasets:[{
               label:'الإيراد حسب التاريخ',
               data:values,
@@ -1186,19 +1428,21 @@
       },
 
       renderRegionChart(data){
-        const allRegions = [...new Set([...REGIONS,...data.map(r=>normalizeRegion(r)).filter(Boolean)])];
-        const values = allRegions.map(region=>data.filter(r=>normalizeRegion(r)===region).reduce((s,r)=>s+normalizeAmountSYP(r),0));
+        const values = REGIONS.map(region=>data
+          .filter(r=>normalizeRegion(r)===region)
+          .reduce((s,r)=>s+normalizeAmountSYP(r),0)
+        );
 
         if(this.charts.region) this.charts.region.destroy();
 
         this.charts.region = new Chart($('regionChart'),{
           type:'bar',
           data:{
-            labels:allRegions,
+            labels:REGIONS,
             datasets:[{
-              label:'الإيراد حسب المنطقة',
+              label:'الإيراد حسب المجموعة',
               data:values,
-              backgroundColor:['#38bdf8','#8b5cf6','#10b981','#f59e0b','#ec4899','#14b8a6'],
+              backgroundColor:['#38bdf8','#8b5cf6','#10b981','#f59e0b'],
               borderRadius:10
             }]
           },
@@ -1230,14 +1474,14 @@
         $('historyTable').innerHTML = data.length
           ? data.map(r=>`
             <tr>
-              <td>${esc(normalizeRep(r)||'-')}</td>
+              <td>${esc(normalizeName(r)||'-')}</td>
               <td>${esc(normalizeRegion(r)||'-')}</td>
               <td>${fmtN(normalizeAmountSYP(r))}</td>
               <td>${fmtN(normalizeExchangeRate(r))}</td>
               <td>${fmtN(normalizeAmountUSD(r))}</td>
-              <td>${formatDateOnly(r.date||'-')}</td>
-              <td>${formatDateTime(r.createdAt||'-')}</td>
-              <td>${esc(r.note||'-')}</td>
+              <td>${displayDate(getDateValue(r)||'-')}</td>
+              <td>${displayDateTime(getCreatedValue(r)||'-')}</td>
+              <td>${esc(r.description || r.note || '-')}</td>
             </tr>
           `).join('')
           : '<tr><td colspan="8" class="empty">لا توجد بيانات حالياً</td></tr>';
@@ -1248,16 +1492,16 @@
         const totalUSD = data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
         const avgRate = totalUSD > 0 ? totalSYP / totalUSD : 0;
 
-        const allDates = [...new Set(data.map(r=>r.date).filter(Boolean))]
+        const allDates = [...new Set(data.map(r=>getDateValue(r)).filter(Boolean))]
           .sort((a,b)=>new Date(b)-new Date(a));
 
         const recentFiltered = this.getFilteredData(this.recentAddedRows);
         const recentByDate = groupByDate(recentFiltered);
         const recentDates = Object.keys(recentByDate).sort((a,b)=>new Date(b)-new Date(a));
 
-        const topReps = Object.entries(groupBy(data,r=>normalizeRep(r)||'غير محدد',r=>normalizeAmountSYP(r)))
+        const topNames = Object.entries(groupBy(data,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
           .sort((a,b)=>b[1]-a[1])
-          .slice(0,5);
+          .slice(0,8);
 
         const regionImg = $('regionChart').toDataURL('image/png',1);
         const dateImg = $('dateChart').toDataURL('image/png',1);
@@ -1266,14 +1510,14 @@
           ? recentDates.map(date=>{
               const rows = recentByDate[date];
               const total = rows.reduce((s,r)=>s+normalizeAmountSYP(r),0);
-              const chips = Object.entries(groupBy(rows,r=>normalizeRegion(r)||'غير محدد',r=>normalizeAmountSYP(r)))
-                .map(([reg,val])=>`<span class="report-chip">${esc(reg)}: ${fmtN(val)} SYP</span>`)
+              const chips = Object.entries(groupBy(rows,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
+                .map(([name,val])=>`<span class="report-chip">${esc(name)}: ${fmtN(val)} SYP</span>`)
                 .join('');
 
               return `
                 <div class="report-mini">
                   <div class="t1">إيراد مضاف حديثًا</div>
-                  <div class="t2">${formatDateOnly(date)}</div>
+                  <div class="t2">${displayDate(date)}</div>
                   <div style="margin-top:8px;font-weight:800;color:#0f172a">${fmtN(total)} SYP</div>
                   <div class="report-chips">${chips}</div>
                 </div>
@@ -1286,7 +1530,8 @@
         pages.push(`
           <div class="report-page">
             <div class="report-title">تقرير لوحة التحكم</div>
-            <div class="report-sub">تاريخ الإنشاء: ${esc(formatDateTime(new Date()))}</div>
+            <div class="report-sub">تاريخ الإنشاء: ${esc(displayDateTime(new Date()))}</div>
+            <div class="report-sub">المصدر: ${esc(this.getDataCollectionName())}</div>
 
             <div class="report-box">
               <div class="report-section-title">الملخص العام</div>
@@ -1302,17 +1547,17 @@
               </div>
 
               <div class="report-chips" style="margin-top:10px">
-                ${allDates.map(d=>`<span class="report-chip">${formatDateOnly(d)}</span>`).join('')}
+                ${allDates.map(d=>`<span class="report-chip">${displayDate(d)}</span>`).join('')}
               </div>
             </div>
 
             <div class="report-box">
-              <div class="report-section-title">أفضل المندوبين</div>
+              <div class="report-section-title">أفضل الأسماء</div>
               <div class="report-grid">
                 ${
-                  topReps.length
-                  ? topReps.map(([name,val])=>`<div class="report-mini"><div class="t1">${esc(name)}</div><div class="t2">${fmtN(val)} SYP</div></div>`).join('')
-                  : '<div class="report-mini"><div class="t1">المندوبون</div><div class="t2">لا يوجد</div></div>'
+                  topNames.length
+                  ? topNames.map(([name,val])=>`<div class="report-mini"><div class="t1">${esc(name)}</div><div class="t2">${fmtN(val)} SYP</div></div>`).join('')
+                  : '<div class="report-mini"><div class="t1">الأسماء</div><div class="t2">لا يوجد</div></div>'
                 }
               </div>
             </div>
@@ -1334,7 +1579,7 @@
             </div>
 
             <div class="report-box">
-              <div class="report-section-title">الإيراد حسب المنطقة</div>
+              <div class="report-section-title">الإيراد حسب المجموعة</div>
               <img src="${regionImg}" style="width:100%;border-radius:14px;border:1px solid #dbeafe">
             </div>
           </div>
@@ -1350,27 +1595,27 @@
               <table class="report-table">
                 <thead>
                   <tr>
-                    <th>المندوب</th>
-                    <th>المنطقة</th>
+                    <th>الاسم</th>
+                    <th>المجموعة</th>
                     <th>SYP</th>
                     <th>الصرف</th>
                     <th>USD</th>
                     <th>تاريخ الإيراد</th>
                     <th>وقت الإضافة</th>
-                    <th>ملاحظة</th>
+                    <th>الوصف</th>
                   </tr>
                 </thead>
                 <tbody>
                   ${chunkRows.map(r=>`
                     <tr>
-                      <td>${esc(normalizeRep(r)||'-')}</td>
+                      <td>${esc(normalizeName(r)||'-')}</td>
                       <td>${esc(normalizeRegion(r)||'-')}</td>
                       <td>${fmtN(normalizeAmountSYP(r))}</td>
                       <td>${fmtN(normalizeExchangeRate(r))}</td>
                       <td>${fmtN(normalizeAmountUSD(r))}</td>
-                      <td>${esc(formatDateOnly(r.date||'-'))}</td>
-                      <td>${esc(formatDateTime(r.createdAt||'-'))}</td>
-                      <td>${esc(r.note||'-')}</td>
+                      <td>${esc(displayDate(getDateValue(r)||'-'))}</td>
+                      <td>${esc(displayDateTime(getCreatedValue(r)||'-'))}</td>
+                      <td>${esc(r.description || r.note || '-')}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -1392,16 +1637,16 @@
         }
 
         const rows = [
-          ['المندوب','المنطقة','المبلغ SYP','سعر الصرف','المبلغ USD','تاريخ الإيراد','وقت الإضافة','الملاحظة'],
+          ['الاسم','المجموعة','المبلغ SYP','سعر الصرف','المبلغ USD','تاريخ الإيراد','وقت الإضافة','الوصف'],
           ...filtered.map(r=>[
-            normalizeRep(r)||'',
+            normalizeName(r)||'',
             normalizeRegion(r)||'',
             normalizeAmountSYP(r),
             normalizeExchangeRate(r),
             normalizeAmountUSD(r),
-            r.date||'',
-            formatDateTime(r.createdAt)||'',
-            r.note||''
+            getDateValue(r)||'',
+            displayDateTime(getCreatedValue(r))||'',
+            r.description || r.note || ''
           ])
         ];
 
