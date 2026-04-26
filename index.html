@@ -88,8 +88,7 @@
     .quick-actions,
     .settings-actions,
     .days-strip,
-    .mini-chips,
-    .report-chips{
+    .mini-chips{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
@@ -188,14 +187,13 @@
     .stats-grid,
     .analysis-grid,
     .insight-grid,
-    .grid-2,
-    .report-grid{
+    .grid-2{
       display:grid;
       gap:12px;
     }
 
     .filters{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-    .new-grid,.insight-grid,.report-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .new-grid,.insight-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
     .analysis-grid{grid-template-columns:1fr 1fr}
     .grid-2{grid-template-columns:1.1fr .9fr}
@@ -272,16 +270,14 @@
 
     .new-day-date,
     .stat .value,
-    .insight .v,
-    .report-mini .t2{
+    .insight .v{
       font-weight:900;
     }
 
     .new-day-date{font-size:17px}
 
     .new-day-sub,
-    .stat .sub,
-    .report-mini .t1{
+    .stat .sub{
       color:var(--muted);
       font-size:12px;
       font-weight:700;
@@ -293,7 +289,7 @@
       font-weight:900;
     }
 
-    .chip,.day-pill,.report-chip{
+    .chip,.day-pill{
       padding:7px 10px;
       border-radius:999px;
       background:rgba(255,255,255,.08);
@@ -407,75 +403,186 @@
       left:-100000px;
       top:0;
       width:794px;
-      background:#f8fbff;
+      background:#eef4ff;
       color:#0f172a;
       z-index:-1;
     }
 
-    .report-page{
+    .pdf-page{
       width:794px;
       min-height:1123px;
-      background:#fff;
-      padding:34px;
+      background:linear-gradient(135deg,#eef7ff 0%,#f8fbff 46%,#eef2ff 100%);
+      color:#0f172a;
+      padding:30px;
       direction:rtl;
       page-break-after:always;
+      font-family:'Cairo',Arial,sans-serif;
     }
 
-    .report-title{
-      font-size:28px;
+    .pdf-hero{
+      background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
+      color:#fff;
+      border-radius:22px;
+      padding:22px 24px;
+      margin-bottom:16px;
+      box-shadow:0 16px 36px rgba(15,23,42,.18);
+    }
+
+    .pdf-hero h1{
+      margin:0 0 8px;
+      font-size:29px;
       font-weight:900;
-      margin-bottom:10px;
-      color:#0f172a;
     }
 
-    .report-sub{
+    .pdf-hero p{
+      margin:0;
       font-size:13px;
-      color:#475569;
-      margin-bottom:14px;
+      opacity:.9;
+      line-height:1.7;
     }
 
-    .report-box,.report-mini{
+    .pdf-summary-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .pdf-card{
+      background:rgba(255,255,255,.82);
       border:1px solid #dbeafe;
-      border-radius:16px;
-      background:#f8fbff;
-      padding:14px;
-      margin-bottom:14px;
+      border-radius:18px;
+      padding:14px 10px;
+      text-align:center;
+      box-shadow:0 8px 18px rgba(15,23,42,.07);
     }
 
-    .report-mini{
-      background:#fff;
-      margin-bottom:0;
+    .pdf-card .k{
+      font-size:11px;
+      color:#64748b;
+      font-weight:800;
+      margin-bottom:6px;
     }
 
-    .report-chip{
-      background:#eef6ff;
-      border-color:#dbeafe;
-      color:#1e3a8a;
+    .pdf-card .v{
+      font-size:17px;
+      color:#0f172a;
+      font-weight:900;
+      direction:ltr;
+      unicode-bidi:plaintext;
     }
 
-    .report-section-title{
+    .pdf-box{
+      background:rgba(255,255,255,.86);
+      border:1px solid #dbeafe;
+      border-radius:20px;
+      padding:16px;
+      margin-bottom:16px;
+      box-shadow:0 8px 18px rgba(15,23,42,.06);
+    }
+
+    .pdf-box-title{
       font-size:18px;
       font-weight:900;
-      margin-bottom:10px;
-      color:#0f172a;
+      color:#172554;
+      margin-bottom:12px;
     }
 
-    .report-table{
+    .pdf-table{
       width:100%;
       border-collapse:collapse;
+      table-layout:fixed;
+      overflow:hidden;
+      border-radius:14px;
       min-width:100%;
     }
 
-    .report-table th,
-    .report-table td{
-      border:1px solid #dbeafe;
-      padding:8px;
-      font-size:12px;
-      color:#0f172a;
-      white-space:normal;
+    .pdf-table th{
+      background:#1e3a8a;
+      color:#fff;
+      font-size:11px;
+      padding:9px 7px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,.18);
+      font-weight:900;
     }
 
-    .report-table th{background:#eff6ff}
+    .pdf-table td{
+      background:#fff;
+      color:#0f172a;
+      font-size:11px;
+      padding:8px 7px;
+      text-align:center;
+      border:1px solid #dbeafe;
+      word-break:break-word;
+    }
+
+    .pdf-table tr:nth-child(even) td{
+      background:#f8fbff;
+    }
+
+    .pdf-table .num{
+      direction:ltr;
+      unicode-bidi:plaintext;
+      font-weight:900;
+      color:#111827;
+    }
+
+    .pdf-bar-chart{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:4px;
+    }
+
+    .pdf-bar-row{
+      display:grid;
+      grid-template-columns:90px 1fr 145px;
+      gap:10px;
+      align-items:center;
+    }
+
+    .pdf-bar-name{
+      font-size:12px;
+      font-weight:900;
+      color:#172554;
+    }
+
+    .pdf-bar-track{
+      height:24px;
+      background:#e2e8f0;
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid #cbd5e1;
+    }
+
+    .pdf-bar-fill{
+      height:100%;
+      border-radius:999px;
+      box-shadow:inset 0 -5px 10px rgba(0,0,0,.12);
+    }
+
+    .pdf-bar-value{
+      font-size:11px;
+      font-weight:900;
+      color:#0f172a;
+      line-height:1.35;
+      direction:ltr;
+      unicode-bidi:plaintext;
+    }
+
+    .pdf-bar-value span{
+      color:#64748b;
+      font-size:10px;
+    }
+
+    .pdf-footer{
+      margin-top:12px;
+      text-align:center;
+      color:#64748b;
+      font-size:10px;
+      font-weight:800;
+    }
 
     @media (max-width:1100px){
       .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -483,7 +590,7 @@
     }
 
     @media (max-width:720px){
-      .new-grid,.stats-grid,.insight-grid,.report-grid{grid-template-columns:1fr}
+      .new-grid,.stats-grid,.insight-grid{grid-template-columns:1fr}
       .topbar{flex-direction:column;align-items:flex-start}
       .chart-wrap{height:260px}
     }
@@ -511,7 +618,7 @@
       <div class="top-actions">
         <button class="btn btn-secondary" onclick="Dashboard.refreshNow()">🔄 تحديث</button>
         <button class="btn btn-warm" onclick="Dashboard.exportCsv()">📥 CSV</button>
-        <button class="btn btn-accent" onclick="Dashboard.exportPdf()">📄 PDF</button>
+        <button class="btn btn-accent" onclick="Dashboard.exportPdf()">📄 PDF مجمّع</button>
         <button class="btn btn-secondary" onclick="Dashboard.toggleSettings()">⚙️ الإعدادات</button>
       </div>
     </div>
@@ -526,7 +633,7 @@
         <h3>⚙️ إعدادات Firebase</h3>
 
         <div class="muted" style="margin-bottom:12px">
-          هذه اللوحة تقرأ من نفس برنامج الإضافة: إذا كتبت Collection Name = imad فهي تقرأ من imad_data.
+          إذا كتبت Collection Name = imad فاللوحة تقرأ من imad_data نفس برنامج الإضافة.
         </div>
 
         <div class="filters">
@@ -550,7 +657,7 @@
       <div class="card">
         <div class="card-head">
           <h3>🔎 الفلاتر الذكية</h3>
-          <div class="muted">الفلاتر تؤثر على الإحصائيات والرسوم والتقرير والتصدير</div>
+          <div class="muted">الـ PDF يتصدر حسب نفس الفلاتر الموجودة هنا</div>
         </div>
 
         <div class="filters">
@@ -584,6 +691,11 @@
           <div class="field">
             <label>أقل مبلغ SYP</label>
             <input id="minAmount" class="input" type="number" min="0" placeholder="0" oninput="Dashboard.renderAll()">
+          </div>
+
+          <div class="field">
+            <label>سعر صرف PDF</label>
+            <input id="pdfExchangeRate" class="input" type="number" min="1" placeholder="مثال: 12300">
           </div>
 
           <div class="field">
@@ -706,6 +818,13 @@
       'ccbs4'
     ];
 
+    const PDF_GROUPS = [
+      { label:'Region 1', names:['Region 1','ccbs1'], color:'#38bdf8' },
+      { label:'Region 2', names:['Region 2','ccbs2'], color:'#8b5cf6' },
+      { label:'Region 3', names:['Region 3','ccbs3'], color:'#10b981' },
+      { label:'Region 4', names:['Region 4','ccbs4'], color:'#f59e0b' }
+    ];
+
     const NAME_TO_REGION = {
       'Region 1':'Region 1',
       'Region 2':'Region 2',
@@ -777,7 +896,11 @@
     };
 
     const normalizeName = item => item.name || item.rep || item.representative || item.salesRep || '';
-    const normalizeRegion = item => item.region || item.group || NAME_TO_REGION[normalizeName(item)] || normalizeName(item) || 'غير محدد';
+
+    const normalizeRegion = item => {
+      const name = normalizeName(item);
+      return item.region || item.group || NAME_TO_REGION[name] || name || 'غير محدد';
+    };
 
     const normalizeAmountSYP = item => {
       if(item.amountSYP != null) return Number(item.amountSYP) || 0;
@@ -787,6 +910,10 @@
       return 0;
     };
 
+    const normalizeExchangeRate = item => {
+      return Number(item.exchangeRate || item.exchange_rate || item.rate || item.exchange || 0) || 0;
+    };
+
     const normalizeAmountUSD = item => {
       if(item.amountUSD != null) return Number(item.amountUSD) || 0;
       if(item.amount_usd != null) return Number(item.amount_usd) || 0;
@@ -794,10 +921,6 @@
 
       const rate = normalizeExchangeRate(item);
       return rate > 0 ? normalizeAmountSYP(item) / rate : 0;
-    };
-
-    const normalizeExchangeRate = item => {
-      return Number(item.exchangeRate || item.exchange_rate || item.rate || item.exchange || 0) || 0;
     };
 
     const getDateValue = item => item.date || item.day || '';
@@ -855,6 +978,7 @@
       if($('dateTo').value) parts.push('إلى: ' + displayDate($('dateTo').value));
       if($('repSearch').value.trim()) parts.push('الاسم: ' + $('repSearch').value.trim());
       if(($('minAmount').value || '').trim()) parts.push('أقل مبلغ: ' + fmtN($('minAmount').value) + ' SYP');
+      if(($('pdfExchangeRate').value || '').trim()) parts.push('سعر صرف PDF: ' + fmtN($('pdfExchangeRate').value));
       return parts.length ? parts : ['بدون فلاتر'];
     };
 
@@ -1144,6 +1268,7 @@
         $('dateTo').value = '';
         $('repSearch').value = '';
         $('minAmount').value = '';
+        $('pdfExchangeRate').value = '';
         $('sortBy').value = 'newest';
         this.renderAll();
       },
@@ -1487,145 +1612,238 @@
           : '<tr><td colspan="8" class="empty">لا توجد بيانات حالياً</td></tr>';
       },
 
-      buildReportPages(data){
+      getPdfRate(data){
+        const manualRate = Number(($('pdfExchangeRate')?.value || '').trim()) || 0;
+
+        if(manualRate > 0){
+          return {
+            rate:manualRate,
+            source:'سعر مكتوب يدويًا'
+          };
+        }
+
         const totalSYP = data.reduce((s,r)=>s+normalizeAmountSYP(r),0);
         const totalUSD = data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
-        const avgRate = totalUSD > 0 ? totalSYP / totalUSD : 0;
+
+        if(totalSYP > 0 && totalUSD > 0){
+          return {
+            rate:totalSYP / totalUSD,
+            source:'محسوب من البيانات'
+          };
+        }
+
+        const rates = data.map(r=>normalizeExchangeRate(r)).filter(v=>v>0);
+
+        if(rates.length){
+          const avg = rates.reduce((a,b)=>a+b,0) / rates.length;
+
+          return {
+            rate:avg,
+            source:'متوسط أسعار السجلات'
+          };
+        }
+
+        return {
+          rate:0,
+          source:'غير متوفر'
+        };
+      },
+
+      buildGroupedReportPages(data){
+        const rateInfo = this.getPdfRate(data);
+        const pdfRate = rateInfo.rate;
+
+        const totalSYP = data.reduce((s,r)=>s+normalizeAmountSYP(r),0);
+        const totalUSD = pdfRate > 0
+          ? totalSYP / pdfRate
+          : data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
         const allDates = [...new Set(data.map(r=>getDateValue(r)).filter(Boolean))]
-          .sort((a,b)=>new Date(b)-new Date(a));
+          .sort((a,b)=>new Date(a)-new Date(b));
 
-        const recentFiltered = this.getFilteredData(this.recentAddedRows);
-        const recentByDate = groupByDate(recentFiltered);
-        const recentDates = Object.keys(recentByDate).sort((a,b)=>new Date(b)-new Date(a));
+        const rangeText = allDates.length
+          ? `${displayDate(allDates[0])} إلى ${displayDate(allDates[allDates.length-1])}`
+          : 'بدون تاريخ';
 
-        const topNames = Object.entries(groupBy(data,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
-          .sort((a,b)=>b[1]-a[1])
-          .slice(0,8);
+        const grouped = PDF_GROUPS.map(g=>{
+          const rows = data.filter(r=>g.names.includes(normalizeName(r)));
+          const syp = rows.reduce((s,r)=>s+normalizeAmountSYP(r),0);
+          const usd = pdfRate > 0
+            ? syp / pdfRate
+            : rows.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
-        const regionImg = $('regionChart').toDataURL('image/png',1);
-        const dateImg = $('dateChart').toDataURL('image/png',1);
+          return {
+            label:g.label,
+            names:g.names,
+            color:g.color,
+            count:rows.length,
+            syp,
+            usd
+          };
+        });
 
-        const recentHtml = recentDates.length
-          ? recentDates.map(date=>{
-              const rows = recentByDate[date];
-              const total = rows.reduce((s,r)=>s+normalizeAmountSYP(r),0);
-              const chips = Object.entries(groupBy(rows,r=>normalizeName(r)||'غير محدد',r=>normalizeAmountSYP(r)))
-                .map(([name,val])=>`<span class="report-chip">${esc(name)}: ${fmtN(val)} SYP</span>`)
-                .join('');
+        const maxSyp = Math.max(...grouped.map(g=>g.syp),1);
 
-              return `
-                <div class="report-mini">
-                  <div class="t1">إيراد مضاف حديثًا</div>
-                  <div class="t2">${displayDate(date)}</div>
-                  <div style="margin-top:8px;font-weight:800;color:#0f172a">${fmtN(total)} SYP</div>
-                  <div class="report-chips">${chips}</div>
-                </div>
-              `;
-            }).join('')
-          : '<div class="report-mini"><div class="t1">الإضافات الحديثة</div><div class="t2">لا يوجد</div></div>';
+        const groupedRows = grouped.map(g=>{
+          const pct = totalSYP > 0 ? ((g.syp / totalSYP) * 100).toFixed(1) : '0.0';
+
+          return `
+            <tr>
+              <td><b>${esc(g.label)}</b></td>
+              <td>${esc(g.names.join(' + '))}</td>
+              <td>${fmtN(g.count)}</td>
+              <td class="num">${fmtN(g.syp)}</td>
+              <td class="num">${fmtN(g.usd)}</td>
+              <td>${pct}%</td>
+            </tr>
+          `;
+        }).join('');
+
+        const barsHtml = grouped.map(g=>{
+          const width = maxSyp > 0 ? Math.max(4,(g.syp / maxSyp) * 100) : 0;
+          const share = totalSYP > 0 ? ((g.syp / totalSYP) * 100).toFixed(1) : '0.0';
+
+          return `
+            <div class="pdf-bar-row">
+              <div class="pdf-bar-name">${esc(g.label)}</div>
+              <div class="pdf-bar-track">
+                <div class="pdf-bar-fill" style="width:${width}%;background:${g.color}"></div>
+              </div>
+              <div class="pdf-bar-value">${fmtN(g.syp)} SYP<br><span>${share}%</span></div>
+            </div>
+          `;
+        }).join('');
+
+        const filtersHtml = reportFilters()
+          .map(item=>`<span style="display:inline-block;background:#dbeafe;color:#1e3a8a;border:1px solid #bfdbfe;padding:6px 10px;border-radius:999px;margin:3px;font-size:10px;font-weight:900">${esc(item)}</span>`)
+          .join('');
 
         const pages = [];
 
         pages.push(`
-          <div class="report-page">
-            <div class="report-title">تقرير لوحة التحكم</div>
-            <div class="report-sub">تاريخ الإنشاء: ${esc(displayDateTime(new Date()))}</div>
-            <div class="report-sub">المصدر: ${esc(this.getDataCollectionName())}</div>
-
-            <div class="report-box">
-              <div class="report-section-title">الملخص العام</div>
-              <div class="report-grid">
-                <div class="report-mini"><div class="t1">إجمالي الإيراد</div><div class="t2">${fmtN(totalSYP)} SYP</div></div>
-                <div class="report-mini"><div class="t1">إيراد الدولار</div><div class="t2">${fmtN(totalUSD)} USD</div></div>
-                <div class="report-mini"><div class="t1">عدد العمليات</div><div class="t2">${fmtN(data.length)}</div></div>
-                <div class="report-mini"><div class="t1">متوسط سعر الصرف</div><div class="t2">${fmtN(avgRate)}</div></div>
-              </div>
-
-              <div class="report-chips" style="margin-top:12px">
-                ${reportFilters().map(item=>`<span class="report-chip">${esc(item)}</span>`).join('')}
-              </div>
-
-              <div class="report-chips" style="margin-top:10px">
-                ${allDates.map(d=>`<span class="report-chip">${displayDate(d)}</span>`).join('')}
-              </div>
+          <div class="pdf-page">
+            <div class="pdf-hero">
+              <h1>تقرير الإيرادات المجمّع</h1>
+              <p>التجميع: Region 1 + ccbs1 / Region 2 + ccbs2 / Region 3 + ccbs3 / Region 4 + ccbs4</p>
+              <p>النطاق: ${esc(rangeText)} — المصدر: ${esc(this.getDataCollectionName())}</p>
             </div>
 
-            <div class="report-box">
-              <div class="report-section-title">أفضل الأسماء</div>
-              <div class="report-grid">
-                ${
-                  topNames.length
-                  ? topNames.map(([name,val])=>`<div class="report-mini"><div class="t1">${esc(name)}</div><div class="t2">${fmtN(val)} SYP</div></div>`).join('')
-                  : '<div class="report-mini"><div class="t1">الأسماء</div><div class="t2">لا يوجد</div></div>'
-                }
+            <div class="pdf-summary-grid">
+              <div class="pdf-card">
+                <div class="k">إجمالي SYP</div>
+                <div class="v">${fmtN(totalSYP)}</div>
+              </div>
+
+              <div class="pdf-card">
+                <div class="k">إجمالي USD</div>
+                <div class="v">${fmtN(totalUSD)}</div>
+              </div>
+
+              <div class="pdf-card">
+                <div class="k">سعر الصرف</div>
+                <div class="v">${pdfRate > 0 ? fmtN(pdfRate) : '-'}</div>
+              </div>
+
+              <div class="pdf-card">
+                <div class="k">عدد العمليات</div>
+                <div class="v">${fmtN(data.length)}</div>
               </div>
             </div>
 
-            <div class="report-box">
-              <div class="report-section-title">الإيرادات المضافة حديثًا</div>
-              <div class="report-grid">${recentHtml}</div>
-            </div>
-          </div>
-        `);
-
-        pages.push(`
-          <div class="report-page">
-            <div class="report-title">الرسوم البيانية</div>
-
-            <div class="report-box">
-              <div class="report-section-title">الإيراد حسب التاريخ</div>
-              <img src="${dateImg}" style="width:100%;border-radius:14px;border:1px solid #dbeafe">
+            <div class="pdf-box">
+              <div class="pdf-box-title">الفلاتر المستخدمة</div>
+              <div>${filtersHtml}</div>
+              <div style="margin-top:8px;color:#64748b;font-size:11px;font-weight:800">مصدر سعر الصرف: ${esc(rateInfo.source)}</div>
             </div>
 
-            <div class="report-box">
-              <div class="report-section-title">الإيراد حسب المجموعة</div>
-              <img src="${regionImg}" style="width:100%;border-radius:14px;border:1px solid #dbeafe">
-            </div>
-          </div>
-        `);
-
-        const dataChunks = chunk(data,16);
-
-        dataChunks.forEach((chunkRows,i)=>{
-          pages.push(`
-            <div class="report-page">
-              <div class="report-title">السجل الكامل ${dataChunks.length > 1 ? `- صفحة ${i+1}` : ''}</div>
-
-              <table class="report-table">
+            <div class="pdf-box">
+              <div class="pdf-box-title">جدول المجموع المجمّع</div>
+              <table class="pdf-table">
                 <thead>
                   <tr>
-                    <th>الاسم</th>
-                    <th>المجموعة</th>
-                    <th>SYP</th>
-                    <th>الصرف</th>
-                    <th>USD</th>
-                    <th>تاريخ الإيراد</th>
-                    <th>وقت الإضافة</th>
-                    <th>الوصف</th>
+                    <th>الاسم الظاهر</th>
+                    <th>الأسماء المدموجة</th>
+                    <th>العدد</th>
+                    <th>المجموع SYP</th>
+                    <th>المجموع USD</th>
+                    <th>النسبة</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${chunkRows.map(r=>`
-                    <tr>
-                      <td>${esc(normalizeName(r)||'-')}</td>
-                      <td>${esc(normalizeRegion(r)||'-')}</td>
-                      <td>${fmtN(normalizeAmountSYP(r))}</td>
-                      <td>${fmtN(normalizeExchangeRate(r))}</td>
-                      <td>${fmtN(normalizeAmountUSD(r))}</td>
-                      <td>${esc(displayDate(getDateValue(r)||'-'))}</td>
-                      <td>${esc(displayDateTime(getCreatedValue(r)||'-'))}</td>
-                      <td>${esc(r.description || r.note || '-')}</td>
-                    </tr>
-                  `).join('')}
+                  ${groupedRows}
                 </tbody>
               </table>
+            </div>
+
+            <div class="pdf-box">
+              <div class="pdf-box-title">الرسم البياني المجمّع</div>
+              <div class="pdf-bar-chart">
+                ${barsHtml}
+              </div>
+            </div>
+
+            <div class="pdf-footer">
+              تم إنشاء التقرير بتاريخ ${displayDateTime(new Date())}
+            </div>
+          </div>
+        `);
+
+        const detailChunks = chunk(data,18);
+
+        detailChunks.forEach((rows,i)=>{
+          const detailRows = rows.map(r=>{
+            const syp = normalizeAmountSYP(r);
+            const usd = pdfRate > 0 ? syp / pdfRate : normalizeAmountUSD(r);
+
+            return `
+              <tr>
+                <td>${esc(displayDate(getDateValue(r)||'-'))}</td>
+                <td>${esc(normalizeName(r)||'-')}</td>
+                <td>${esc(normalizeRegion(r)||'-')}</td>
+                <td class="num">${fmtN(syp)}</td>
+                <td class="num">${fmtN(usd)}</td>
+                <td class="num">${pdfRate > 0 ? fmtN(pdfRate) : fmtN(normalizeExchangeRate(r))}</td>
+                <td>${esc(r.description || r.note || '-')}</td>
+              </tr>
+            `;
+          }).join('');
+
+          pages.push(`
+            <div class="pdf-page">
+              <div class="pdf-hero">
+                <h1>تفاصيل السجل</h1>
+                <p>صفحة ${i+1} من ${detailChunks.length} — حسب الفلاتر الحالية</p>
+              </div>
+
+              <div class="pdf-box">
+                <div class="pdf-box-title">تفاصيل العمليات</div>
+                <table class="pdf-table">
+                  <thead>
+                    <tr>
+                      <th>التاريخ</th>
+                      <th>الاسم</th>
+                      <th>المجموعة</th>
+                      <th>SYP</th>
+                      <th>USD</th>
+                      <th>سعر الصرف</th>
+                      <th>الوصف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${detailRows}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pdf-footer">
+                تم إنشاء التقرير بتاريخ ${displayDateTime(new Date())}
+              </div>
             </div>
           `);
         });
 
         $('reportRender').innerHTML = pages.join('');
-        return [...$('reportRender').querySelectorAll('.report-page')];
+        return [...$('reportRender').querySelectorAll('.pdf-page')];
       },
 
       exportCsv(){
@@ -1675,29 +1893,34 @@
             return;
           }
 
-          await new Promise(resolve=>setTimeout(resolve,250));
-
-          const pages = this.buildReportPages(filtered);
+          const pages = this.buildGroupedReportPages(filtered);
           const { jsPDF } = window.jspdf;
           const pdf = new jsPDF('p','pt','a4');
 
+          toast('جاري إنشاء PDF...');
+
           for(let i=0;i<pages.length;i++){
             const canvas = await html2canvas(pages[i],{
-              scale:2,
+              scale:2.2,
               useCORS:true,
-              backgroundColor:'#ffffff'
+              backgroundColor:'#eef4ff',
+              logging:false
             });
 
-            const imgData = canvas.toDataURL('image/jpeg',0.95);
+            const imgData = canvas.toDataURL('image/jpeg',0.96);
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
 
             if(i > 0) pdf.addPage();
+
             pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
           }
 
-          pdf.save('dashboard_report.pdf');
-          toast('تم إنشاء التقرير بنجاح');
+          const from = $('dateFrom').value || 'all';
+          const to = $('dateTo').value || 'all';
+
+          pdf.save(`grouped_revenue_report_${from}_to_${to}.pdf`);
+          toast('تم إنشاء PDF المجمّع بنجاح');
         }catch(err){
           console.error(err);
           toast('صار خطأ أثناء إنشاء التقرير','err');
