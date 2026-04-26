@@ -13,26 +13,18 @@
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
 
     :root{
-      --bg1:#061630;
-      --bg2:#0b2a57;
-      --bg3:#103b77;
-      --glass:rgba(255,255,255,.1);
-      --border:rgba(255,255,255,.16);
-      --text:#edf5ff;
-      --muted:rgba(237,245,255,.72);
-      --success:#19c37d;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --shadow:0 20px 40px rgba(0,0,0,.25);
-      --radius:20px;
+      --bg1:#061630;--bg2:#0b2a57;--bg3:#103b77;
+      --glass:rgba(255,255,255,.1);--border:rgba(255,255,255,.16);
+      --text:#edf5ff;--muted:rgba(237,245,255,.72);
+      --success:#19c37d;--warn:#f59e0b;--danger:#ef4444;
+      --shadow:0 20px 40px rgba(0,0,0,.25);--radius:20px;
     }
 
     *{margin:0;padding:0;box-sizing:border-box}
     html,body{height:100%}
 
     body{
-      font-family:'Cairo',sans-serif;
-      color:var(--text);
+      font-family:'Cairo',sans-serif;color:var(--text);
       background:
         radial-gradient(circle at 15% 20%,rgba(56,189,248,.20),transparent 25%),
         radial-gradient(circle at 85% 15%,rgba(139,92,246,.18),transparent 25%),
@@ -42,17 +34,13 @@
     }
 
     body::before{
-      content:'';
-      position:fixed;
-      inset:0;
+      content:'';position:fixed;inset:0;
       background:
         radial-gradient(2px 2px at 40px 60px,rgba(255,255,255,.6),transparent),
         radial-gradient(1.5px 1.5px at 130px 90px,rgba(255,255,255,.4),transparent),
         radial-gradient(2px 2px at 240px 160px,rgba(255,255,255,.45),transparent);
-      background-size:320px 220px;
-      animation:stars 10s linear infinite;
-      opacity:.35;
-      pointer-events:none;
+      background-size:320px 220px;animation:stars 10s linear infinite;
+      opacity:.35;pointer-events:none;
     }
 
     @keyframes stars{from{transform:translateY(0)}to{transform:translateY(-40px)}}
@@ -62,65 +50,29 @@
     .app{height:100%;display:flex;flex-direction:column}
 
     .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:16px 18px;
-      background:rgba(255,255,255,.06);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--border);
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:16px 18px;background:rgba(255,255,255,.06);
+      backdrop-filter:blur(18px);border-bottom:1px solid var(--border);
     }
 
     .top-title{display:flex;flex-direction:column;gap:4px}
     .top-title h1{font-size:26px;line-height:1;font-weight:900}
+    .top-title .sub{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 
-    .top-title .sub{
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
+    .top-actions,.quick-actions,.settings-actions,.days-strip,.mini-chips{display:flex;flex-wrap:wrap;gap:8px}
 
-    .top-actions,
-    .quick-actions,
-    .settings-actions,
-    .days-strip,
-    .mini-chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .sync-dot{
-      width:9px;
-      height:9px;
-      border-radius:50%;
-      display:inline-block;
-    }
-
+    .sync-dot{width:9px;height:9px;border-radius:50%;display:inline-block}
     .sync-dot.ok{background:var(--success)}
     .sync-dot.syncing{background:var(--warn);animation:pulse 1s infinite}
     .sync-dot.err{background:var(--danger)}
 
     .btn,.chip-btn,.input,.select{font-family:'Cairo',sans-serif}
-
-    .btn,.chip-btn{
-      cursor:pointer;
-      transition:.18s ease;
-      color:#fff;
-    }
-
+    .btn,.chip-btn{cursor:pointer;transition:.18s ease;color:#fff}
     .btn:hover,.chip-btn:hover,.card:hover{transform:translateY(-1px)}
     .btn:active{transform:scale(.98)}
 
     .btn{
-      border:none;
-      border-radius:14px;
-      padding:11px 16px;
-      font-weight:800;
+      border:none;border-radius:14px;padding:11px 16px;font-weight:800;
       backdrop-filter:blur(10px);
     }
 
@@ -130,459 +82,149 @@
     .btn-warm{background:linear-gradient(135deg,#f59e0b,#f97316)}
 
     .chip-btn{
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(255,255,255,.08);
-      font-weight:800;
+      padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.08);font-weight:800;
     }
 
-    .content{
-      flex:1;
-      overflow:auto;
-      padding:18px;
-    }
-
+    .content{flex:1;overflow:auto;padding:18px}
     .content::-webkit-scrollbar{width:8px}
     .content::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:12px}
 
     .card,.stat{
-      background:var(--glass);
-      border:1px solid var(--border);
-      backdrop-filter:blur(18px);
-      border-radius:var(--radius);
-      padding:18px;
-      box-shadow:var(--shadow);
-      margin-bottom:16px;
-      transition:.18s ease;
+      background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(18px);
+      border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);
+      margin-bottom:16px;transition:.18s ease;
     }
 
-    .card-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:14px;
-      flex-wrap:wrap;
-    }
-
-    .card h3{
-      font-size:18px;
-      font-weight:900;
-      margin-bottom:14px;
-    }
-
+    .card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+    .card h3{font-size:18px;font-weight:900;margin-bottom:14px}
     .card-head h3{margin-bottom:0}
-
-    .muted{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-    }
-
+    .muted{color:var(--muted);font-size:12px;font-weight:700}
     .hidden{display:none!important}
 
-    .filters,
-    .new-grid,
-    .stats-grid,
-    .analysis-grid,
-    .insight-grid,
-    .grid-2{
-      display:grid;
-      gap:12px;
-    }
-
+    .filters,.new-grid,.stats-grid,.analysis-grid,.insight-grid,.grid-2{display:grid;gap:12px}
     .filters{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
     .new-grid,.insight-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     .stats-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
     .analysis-grid{grid-template-columns:1fr 1fr}
     .grid-2{grid-template-columns:1.1fr .9fr}
 
-    .field label{
-      display:block;
-      font-size:12px;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-weight:800;
-    }
-
+    .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:800}
     .input,.select{
-      width:100%;
-      padding:11px 12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      outline:none;
+      width:100%;padding:11px 12px;border-radius:14px;border:1px solid var(--border);
+      background:rgba(255,255,255,.08);color:#fff;outline:none;
     }
-
     .select option{background:#12315f;color:#fff}
     .input::placeholder{color:rgba(255,255,255,.45)}
 
     .hero-alert{
-      display:none;
-      align-items:center;
-      gap:12px;
-      padding:16px 18px;
-      border-radius:18px;
+      display:none;align-items:center;gap:12px;padding:16px 18px;border-radius:18px;
       background:linear-gradient(135deg,rgba(56,189,248,.18),rgba(139,92,246,.18));
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:var(--shadow);
-      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow);margin-bottom:16px;
     }
-
     .hero-alert.show{display:flex}
-
-    .hero-alert .icon{
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      font-size:22px;
-      background:rgba(255,255,255,.12);
-    }
-
-    .hero-alert .txt{
-      line-height:1.6;
-      font-size:15px;
-      font-weight:800;
-    }
-
+    .hero-alert .icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.12)}
+    .hero-alert .txt{line-height:1.6;font-size:15px;font-weight:800}
     .hero-alert .txt span{color:#bfdbfe}
 
-    .new-day-card,
-    .insight,
-    .leader-row{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      padding:14px;
+    .new-day-card,.insight,.leader-row{
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;padding:14px;
     }
 
-    .new-day-head,
-    .leader-top{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-    }
-
-    .new-day-date,
-    .stat .value,
-    .insight .v{
-      font-weight:900;
-    }
-
+    .new-day-head,.leader-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .new-day-date,.stat .value,.insight .v{font-weight:900}
     .new-day-date{font-size:17px}
-
-    .new-day-sub,
-    .stat .sub{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .new-day-total{
-      text-align:left;
-      font-size:18px;
-      font-weight:900;
-    }
+    .new-day-sub,.stat .sub{color:var(--muted);font-size:12px;font-weight:700}
+    .new-day-total{text-align:left;font-size:18px;font-weight:900}
 
     .chip,.day-pill{
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.14);
-      font-size:12px;
-      font-weight:800;
+      padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:800;
     }
 
-    .stat .label,
-    .insight .k{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
+    .stat .label,.insight .k{font-size:12px;color:var(--muted);font-weight:800;margin-bottom:6px}
     .leaderboard{display:flex;flex-direction:column;gap:10px}
+    .leader-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .leader-bar{height:9px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:8px}
+    .leader-bar span{display:block;height:100%;background:linear-gradient(90deg,#38bdf8,#8b5cf6)}
 
-    .leader-name{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .leader-bar{
-      height:9px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      overflow:hidden;
-      margin-top:8px;
-    }
-
-    .leader-bar span{
-      display:block;
-      height:100%;
-      background:linear-gradient(90deg,#38bdf8,#8b5cf6);
-    }
-
-    .chart-wrap{
-      height:330px;
-      position:relative;
-    }
-
-    .table-wrap{
-      overflow:auto;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:980px;
-    }
-
-    th,td{
-      padding:11px 10px;
-      font-size:13px;
-      text-align:right;
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-
-    th{
-      background:rgba(255,255,255,.08);
-      border-bottom:1px solid rgba(255,255,255,.12);
-    }
-
+    .chart-wrap{height:330px;position:relative}
+    .table-wrap{overflow:auto;border-radius:16px;border:1px solid rgba(255,255,255,.10)}
+    table{width:100%;border-collapse:collapse;min-width:980px}
+    th,td{padding:11px 10px;font-size:13px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07)}
+    th{background:rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.12)}
     tr:hover td{background:rgba(255,255,255,.04)}
+    .empty{text-align:center;color:var(--muted);padding:26px;font-weight:800}
 
-    .empty{
-      text-align:center;
-      color:var(--muted);
-      padding:26px;
-      font-weight:800;
-    }
-
-    .toast-box{
-      position:fixed;
-      top:16px;
-      right:16px;
-      z-index:99999;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-
+    .toast-box{position:fixed;top:16px;right:16px;z-index:99999;display:flex;flex-direction:column;gap:8px}
     .toast{
-      padding:12px 14px;
-      border-radius:14px;
-      font-weight:800;
-      font-size:13px;
-      backdrop-filter:blur(10px);
-      box-shadow:0 10px 24px rgba(0,0,0,.18);
+      padding:12px 14px;border-radius:14px;font-weight:800;font-size:13px;
+      backdrop-filter:blur(10px);box-shadow:0 10px 24px rgba(0,0,0,.18);
       animation:toastIn .2s ease;
     }
-
-    .toast.ok{
-      background:rgba(25,195,125,.18);
-      border:1px solid rgba(25,195,125,.45);
-      color:#d1fae5;
-    }
-
-    .toast.err{
-      background:rgba(239,68,68,.18);
-      border:1px solid rgba(239,68,68,.42);
-      color:#fee2e2;
-    }
+    .toast.ok{background:rgba(25,195,125,.18);border:1px solid rgba(25,195,125,.45);color:#d1fae5}
+    .toast.err{background:rgba(239,68,68,.18);border:1px solid rgba(239,68,68,.42);color:#fee2e2}
 
     #reportRender{
-      position:fixed;
-      left:-100000px;
-      top:0;
-      width:794px;
-      background:#eef4ff;
-      color:#0f172a;
-      z-index:-1;
+      position:fixed;left:-100000px;top:0;width:794px;
+      background:#eef4ff;color:#0f172a;z-index:-1;
     }
 
     .pdf-page{
-      width:794px;
-      min-height:1123px;
+      width:794px;min-height:1123px;
       background:linear-gradient(135deg,#eef7ff 0%,#f8fbff 46%,#eef2ff 100%);
-      color:#0f172a;
-      padding:30px;
-      direction:rtl;
-      page-break-after:always;
+      color:#0f172a;padding:30px;direction:rtl;page-break-after:always;
       font-family:'Cairo',Arial,sans-serif;
     }
 
     .pdf-hero{
       background:linear-gradient(135deg,#0f172a,#1e3a8a,#312e81);
-      color:#fff;
-      border-radius:22px;
-      padding:22px 24px;
-      margin-bottom:16px;
+      color:#fff;border-radius:22px;padding:22px 24px;margin-bottom:16px;
       box-shadow:0 16px 36px rgba(15,23,42,.18);
     }
+    .pdf-hero h1{margin:0 0 8px;font-size:29px;font-weight:900}
+    .pdf-hero p{margin:0;font-size:13px;opacity:.9;line-height:1.7}
 
-    .pdf-hero h1{
-      margin:0 0 8px;
-      font-size:29px;
-      font-weight:900;
-    }
-
-    .pdf-hero p{
-      margin:0;
-      font-size:13px;
-      opacity:.9;
-      line-height:1.7;
-    }
-
-    .pdf-summary-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      margin-bottom:16px;
-    }
-
+    .pdf-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
     .pdf-card{
-      background:rgba(255,255,255,.82);
-      border:1px solid #dbeafe;
-      border-radius:18px;
-      padding:14px 10px;
-      text-align:center;
-      box-shadow:0 8px 18px rgba(15,23,42,.07);
+      background:rgba(255,255,255,.82);border:1px solid #dbeafe;border-radius:18px;
+      padding:14px 10px;text-align:center;box-shadow:0 8px 18px rgba(15,23,42,.07);
     }
-
-    .pdf-card .k{
-      font-size:11px;
-      color:#64748b;
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
-    .pdf-card .v{
-      font-size:17px;
-      color:#0f172a;
-      font-weight:900;
-      direction:ltr;
-      unicode-bidi:plaintext;
-    }
+    .pdf-card .k{font-size:11px;color:#64748b;font-weight:800;margin-bottom:6px}
+    .pdf-card .v{font-size:17px;color:#0f172a;font-weight:900;direction:ltr;unicode-bidi:plaintext}
 
     .pdf-box{
-      background:rgba(255,255,255,.86);
-      border:1px solid #dbeafe;
-      border-radius:20px;
-      padding:16px;
-      margin-bottom:16px;
-      box-shadow:0 8px 18px rgba(15,23,42,.06);
+      background:rgba(255,255,255,.86);border:1px solid #dbeafe;border-radius:20px;
+      padding:16px;margin-bottom:16px;box-shadow:0 8px 18px rgba(15,23,42,.06);
     }
-
-    .pdf-box-title{
-      font-size:18px;
-      font-weight:900;
-      color:#172554;
-      margin-bottom:12px;
-    }
+    .pdf-box-title{font-size:18px;font-weight:900;color:#172554;margin-bottom:12px}
 
     .pdf-table{
-      width:100%;
-      border-collapse:collapse;
-      table-layout:fixed;
-      overflow:hidden;
-      border-radius:14px;
-      min-width:100%;
+      width:100%;border-collapse:collapse;table-layout:fixed;overflow:hidden;
+      border-radius:14px;min-width:100%;
     }
-
     .pdf-table th{
-      background:#1e3a8a;
-      color:#fff;
-      font-size:11px;
-      padding:9px 7px;
-      text-align:center;
-      border:1px solid rgba(255,255,255,.18);
-      font-weight:900;
+      background:#1e3a8a;color:#fff;font-size:11px;padding:9px 7px;
+      text-align:center;border:1px solid rgba(255,255,255,.18);font-weight:900;
     }
-
     .pdf-table td{
-      background:#fff;
-      color:#0f172a;
-      font-size:11px;
-      padding:8px 7px;
-      text-align:center;
-      border:1px solid #dbeafe;
-      word-break:break-word;
+      background:#fff;color:#0f172a;font-size:11px;padding:8px 7px;text-align:center;
+      border:1px solid #dbeafe;word-break:break-word;
     }
+    .pdf-table tr:nth-child(even) td{background:#f8fbff}
+    .pdf-table .num{direction:ltr;unicode-bidi:plaintext;font-weight:900;color:#111827}
 
-    .pdf-table tr:nth-child(even) td{
-      background:#f8fbff;
-    }
-
-    .pdf-table .num{
-      direction:ltr;
-      unicode-bidi:plaintext;
-      font-weight:900;
-      color:#111827;
-    }
-
-    .pdf-bar-chart{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      margin-top:4px;
-    }
-
-    .pdf-bar-row{
-      display:grid;
-      grid-template-columns:90px 1fr 145px;
-      gap:10px;
-      align-items:center;
-    }
-
-    .pdf-bar-name{
-      font-size:12px;
-      font-weight:900;
-      color:#172554;
-    }
-
+    .pdf-bar-chart{display:flex;flex-direction:column;gap:12px;margin-top:4px}
+    .pdf-bar-row{display:grid;grid-template-columns:90px 1fr 145px;gap:10px;align-items:center}
+    .pdf-bar-name{font-size:12px;font-weight:900;color:#172554}
     .pdf-bar-track{
-      height:24px;
-      background:#e2e8f0;
-      border-radius:999px;
-      overflow:hidden;
-      border:1px solid #cbd5e1;
+      height:24px;background:#e2e8f0;border-radius:999px;overflow:hidden;border:1px solid #cbd5e1;
     }
-
-    .pdf-bar-fill{
-      height:100%;
-      border-radius:999px;
-      box-shadow:inset 0 -5px 10px rgba(0,0,0,.12);
-    }
-
-    .pdf-bar-value{
-      font-size:11px;
-      font-weight:900;
-      color:#0f172a;
-      line-height:1.35;
-      direction:ltr;
-      unicode-bidi:plaintext;
-    }
-
-    .pdf-bar-value span{
-      color:#64748b;
-      font-size:10px;
-    }
-
-    .pdf-footer{
-      margin-top:12px;
-      text-align:center;
-      color:#64748b;
-      font-size:10px;
-      font-weight:800;
-    }
+    .pdf-bar-fill{height:100%;border-radius:999px;box-shadow:inset 0 -5px 10px rgba(0,0,0,.12)}
+    .pdf-bar-value{font-size:11px;font-weight:900;color:#0f172a;line-height:1.35;direction:ltr;unicode-bidi:plaintext}
+    .pdf-bar-value span{color:#64748b;font-size:10px}
+    .pdf-footer{margin-top:12px;text-align:center;color:#64748b;font-size:10px;font-weight:800}
 
     @media (max-width:1100px){
       .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -631,7 +273,6 @@
 
       <div class="card hidden" id="settingsCard">
         <h3>⚙️ إعدادات Firebase</h3>
-
         <div class="muted" style="margin-bottom:12px">
           إذا كتبت Collection Name = imad فاللوحة تقرأ من imad_data نفس برنامج الإضافة.
         </div>
@@ -657,7 +298,7 @@
       <div class="card">
         <div class="card-head">
           <h3>🔎 الفلاتر الذكية</h3>
-          <div class="muted">الـ PDF يتصدر حسب نفس الفلاتر الموجودة هنا</div>
+          <div class="muted">الـ PDF صفحة واحدة حسب نفس الفلاتر الموجودة هنا</div>
         </div>
 
         <div class="filters">
@@ -808,14 +449,8 @@
     const REGIONS = ['Region 1','Region 2','Region 3','Region 4'];
 
     const NAMES = [
-      'Region 1',
-      'Region 2',
-      'Region 3',
-      'Region 4',
-      'ccbs1',
-      'ccbs2',
-      'ccbs3',
-      'ccbs4'
+      'Region 1','Region 2','Region 3','Region 4',
+      'ccbs1','ccbs2','ccbs3','ccbs4'
     ];
 
     const PDF_GROUPS = [
@@ -826,14 +461,8 @@
     ];
 
     const NAME_TO_REGION = {
-      'Region 1':'Region 1',
-      'Region 2':'Region 2',
-      'Region 3':'Region 3',
-      'Region 4':'Region 4',
-      'ccbs1':'Region 1',
-      'ccbs2':'Region 2',
-      'ccbs3':'Region 3',
-      'ccbs4':'Region 4'
+      'Region 1':'Region 1','Region 2':'Region 2','Region 3':'Region 3','Region 4':'Region 4',
+      'ccbs1':'Region 1','ccbs2':'Region 2','ccbs3':'Region 3','ccbs4':'Region 4'
     };
 
     const $ = id => document.getElementById(id);
@@ -861,7 +490,6 @@
 
     const displayDate = v => {
       if(!v) return '-';
-
       const s = String(v);
 
       if(/^\d{4}-\d{2}-\d{2}$/.test(s)){
@@ -869,9 +497,7 @@
         return `${d}/${m}/${y}`;
       }
 
-      if(v && typeof v.toDate === 'function'){
-        v = v.toDate();
-      }
+      if(v && typeof v.toDate === 'function') v = v.toDate();
 
       const d = new Date(v);
       return Number.isNaN(d.getTime()) ? s : d.toLocaleDateString('ar-SY');
@@ -879,19 +505,12 @@
 
     const displayDateTime = v => {
       if(!v) return '-';
-
-      if(v && typeof v.toDate === 'function'){
-        v = v.toDate();
-      }
+      if(v && typeof v.toDate === 'function') v = v.toDate();
 
       const d = new Date(v);
 
       return Number.isNaN(d.getTime()) ? String(v) : d.toLocaleString('ar-SY',{
-        year:'numeric',
-        month:'2-digit',
-        day:'2-digit',
-        hour:'2-digit',
-        minute:'2-digit'
+        year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'
       });
     };
 
@@ -910,9 +529,7 @@
       return 0;
     };
 
-    const normalizeExchangeRate = item => {
-      return Number(item.exchangeRate || item.exchange_rate || item.rate || item.exchange || 0) || 0;
-    };
+    const normalizeExchangeRate = item => Number(item.exchangeRate || item.exchange_rate || item.rate || item.exchange || 0) || 0;
 
     const normalizeAmountUSD = item => {
       if(item.amountUSD != null) return Number(item.amountUSD) || 0;
@@ -924,15 +541,11 @@
     };
 
     const getDateValue = item => item.date || item.day || '';
-
     const getCreatedValue = item => item.createdAt || item.created_at || item.addedAt || item.timestamp || item.date || '';
 
     const getCreatedTime = item => {
       const v = getCreatedValue(item);
-
-      if(v && typeof v.toDate === 'function'){
-        return v.toDate().getTime();
-      }
+      if(v && typeof v.toDate === 'function') return v.toDate().getTime();
 
       const t = new Date(v).getTime();
       return Number.isFinite(t) ? t : 0;
@@ -944,12 +557,6 @@
       .replace(/>/g,'&gt;')
       .replace(/"/g,'&quot;')
       .replace(/'/g,'&#039;');
-
-    const chunk = (arr,size) => {
-      const out = [];
-      for(let i=0;i<arr.length;i+=size) out.push(arr.slice(i,i+size));
-      return out;
-    };
 
     const toast = (text,type='ok') => {
       const div = document.createElement('div');
@@ -983,14 +590,8 @@
     };
 
     window.Dashboard = {
-      app:null,
-      db:null,
-      unsubscribeData:null,
-      unsubscribeRates:null,
-      rawData:[],
-      recentAddedRows:[],
-      exchangeRates:{},
-      charts:{date:null,region:null},
+      app:null,db:null,unsubscribeData:null,unsubscribeRates:null,
+      rawData:[],recentAddedRows:[],exchangeRates:{},charts:{date:null,region:null},
 
       init(){
         $('todayText').textContent = 'اليوم: ' + displayDate(todayStr());
@@ -1000,9 +601,7 @@
       },
 
       initNameOptions(){
-        $('repSuggestions').innerHTML = NAMES
-          .map(name=>`<option value="${esc(name)}"></option>`)
-          .join('');
+        $('repSuggestions').innerHTML = NAMES.map(name=>`<option value="${esc(name)}"></option>`).join('');
 
         $('repQuickActions').innerHTML = [
           `<button class="chip-btn" onclick="Dashboard.setRepSearch('')">كل الأسماء</button>`,
@@ -1076,15 +675,8 @@
         $('projectId').value = FIREBASE_PRESET.projectId || 'imad222';
         $('collectionName').value = FIREBASE_PRESET.collectionName || 'imad';
 
-        if(this.unsubscribeData){
-          this.unsubscribeData();
-          this.unsubscribeData = null;
-        }
-
-        if(this.unsubscribeRates){
-          this.unsubscribeRates();
-          this.unsubscribeRates = null;
-        }
+        if(this.unsubscribeData){this.unsubscribeData();this.unsubscribeData=null}
+        if(this.unsubscribeRates){this.unsubscribeRates();this.unsubscribeRates=null}
 
         this.rawData = [];
         this.recentAddedRows = [];
@@ -1095,11 +687,8 @@
       },
 
       autoStartIfConfig(){
-        if(FIREBASE_PRESET.apiKey && this.getProjectId()){
-          this.start();
-        }else{
-          this.setSync('err','أدخل بيانات Firebase');
-        }
+        if(FIREBASE_PRESET.apiKey && this.getProjectId()) this.start();
+        else this.setSync('err','أدخل بيانات Firebase');
       },
 
       start(){
@@ -1157,19 +746,15 @@
 
               rows.push({
                 id:docSnap.id,
-
                 name:d.name || d.rep || d.representative || d.salesRep || '',
                 region:d.region || d.group || '',
                 group:d.group || d.region || '',
-
                 amount_syp:d.amount_syp ?? d.amountSYP ?? d.syp ?? d.amount ?? 0,
                 amount_usd:d.amount_usd ?? d.amountUSD ?? d.usd ?? null,
                 exchange_rate:d.exchange_rate ?? d.exchangeRate ?? d.rate ?? d.exchange ?? 0,
-
                 date:d.date || d.day || '',
                 description:d.description || d.note || d.notes || '',
                 note:d.note || d.description || d.notes || '',
-
                 created_at:d.created_at || d.createdAt || d.addedAt || d.timestamp || d.date || ''
               });
             });
@@ -1209,15 +794,11 @@
             const map = {};
             snapshot.forEach(docSnap=>{
               const d = docSnap.data() || {};
-              if(d.date && d.rate != null){
-                map[d.date] = Number(d.rate) || 0;
-              }
+              if(d.date && d.rate != null) map[d.date] = Number(d.rate) || 0;
             });
             this.exchangeRates = map;
           },
-          error => {
-            console.warn('Rates listener error:', error);
-          }
+          error => console.warn('Rates listener error:', error)
         );
       },
 
@@ -1385,41 +966,12 @@
         const topName = nameTotals[0];
 
         $('overviewStats').innerHTML = `
-          <div class="stat">
-            <div class="label">إجمالي الإيراد</div>
-            <div class="value">${fmtN(totalSYP)}</div>
-            <div class="sub">SYP</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">إيراد الدولار</div>
-            <div class="value">${fmtN(totalUSD)}</div>
-            <div class="sub">USD</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">عدد العمليات</div>
-            <div class="value">${fmtN(data.length)}</div>
-            <div class="sub">عملية</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">عدد أيام الإيراد</div>
-            <div class="value">${fmtN(allDates.length)}</div>
-            <div class="sub">يوم مختلف</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">أعلى مجموعة</div>
-            <div class="value">${esc(topRegion ? topRegion[0] : '-')}</div>
-            <div class="sub">${topRegion ? fmtN(topRegion[1]) + ' SYP' : 'لا توجد بيانات'}</div>
-          </div>
-
-          <div class="stat">
-            <div class="label">أعلى اسم</div>
-            <div class="value">${esc(topName ? topName[0] : '-')}</div>
-            <div class="sub">${topName ? fmtN(topName[1]) + ' SYP' : 'لا توجد بيانات'}</div>
-          </div>
+          <div class="stat"><div class="label">إجمالي الإيراد</div><div class="value">${fmtN(totalSYP)}</div><div class="sub">SYP</div></div>
+          <div class="stat"><div class="label">إيراد الدولار</div><div class="value">${fmtN(totalUSD)}</div><div class="sub">USD</div></div>
+          <div class="stat"><div class="label">عدد العمليات</div><div class="value">${fmtN(data.length)}</div><div class="sub">عملية</div></div>
+          <div class="stat"><div class="label">عدد أيام الإيراد</div><div class="value">${fmtN(allDates.length)}</div><div class="sub">يوم مختلف</div></div>
+          <div class="stat"><div class="label">أعلى مجموعة</div><div class="value">${esc(topRegion ? topRegion[0] : '-')}</div><div class="sub">${topRegion ? fmtN(topRegion[1]) + ' SYP' : 'لا توجد بيانات'}</div></div>
+          <div class="stat"><div class="label">أعلى اسم</div><div class="value">${esc(topName ? topName[0] : '-')}</div><div class="sub">${topName ? fmtN(topName[1]) + ' SYP' : 'لا توجد بيانات'}</div></div>
         `;
       },
 
@@ -1434,10 +986,7 @@
         const byDate = groupByDate(data);
 
         const bestDay = Object.entries(byDate)
-          .map(([date,rows])=>({
-            date,
-            total:rows.reduce((s,r)=>s+normalizeAmountSYP(r),0)
-          }))
+          .map(([date,rows])=>({date,total:rows.reduce((s,r)=>s+normalizeAmountSYP(r),0)}))
           .sort((a,b)=>b.total-a.total)[0];
 
         const datesCount = new Set(data.map(r=>getDateValue(r)).filter(Boolean)).size || 1;
@@ -1446,29 +995,10 @@
         const latest = [...data].sort((a,b)=>getCreatedTime(b)-getCreatedTime(a))[0];
 
         target.innerHTML = `
-          <div class="insight">
-            <div class="k">أفضل يوم</div>
-            <div class="v">${bestDay ? displayDate(bestDay.date) : '-'}</div>
-            <div class="muted">${bestDay ? fmtN(bestDay.total) + ' SYP' : 'لا توجد بيانات'}</div>
-          </div>
-
-          <div class="insight">
-            <div class="k">المتوسط اليومي</div>
-            <div class="v">${fmtN(avgDaily)}</div>
-            <div class="muted">SYP</div>
-          </div>
-
-          <div class="insight">
-            <div class="k">متوسط العملية</div>
-            <div class="v">${fmtN(avgTicket)}</div>
-            <div class="muted">SYP لكل عملية</div>
-          </div>
-
-          <div class="insight">
-            <div class="k">آخر عملية مضافة</div>
-            <div class="v">${esc(normalizeName(latest)||'بدون اسم')}</div>
-            <div class="muted">${displayDateTime(getCreatedValue(latest))}</div>
-          </div>
+          <div class="insight"><div class="k">أفضل يوم</div><div class="v">${bestDay ? displayDate(bestDay.date) : '-'}</div><div class="muted">${bestDay ? fmtN(bestDay.total) + ' SYP' : 'لا توجد بيانات'}</div></div>
+          <div class="insight"><div class="k">المتوسط اليومي</div><div class="v">${fmtN(avgDaily)}</div><div class="muted">SYP</div></div>
+          <div class="insight"><div class="k">متوسط العملية</div><div class="v">${fmtN(avgTicket)}</div><div class="muted">SYP لكل عملية</div></div>
+          <div class="insight"><div class="k">آخر عملية مضافة</div><div class="v">${esc(normalizeName(latest)||'بدون اسم')}</div><div class="muted">${displayDateTime(getCreatedValue(latest))}</div></div>
         `;
       },
 
@@ -1533,20 +1063,10 @@
           options:{
             responsive:true,
             maintainAspectRatio:false,
-            plugins:{
-              legend:{
-                labels:{color:'#fff',font:{family:'Cairo',size:12}}
-              }
-            },
+            plugins:{legend:{labels:{color:'#fff',font:{family:'Cairo',size:12}}}},
             scales:{
-              x:{
-                ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},
-                grid:{color:'rgba(255,255,255,.08)'}
-              },
-              y:{
-                ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},
-                grid:{color:'rgba(255,255,255,.08)'}
-              }
+              x:{ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},grid:{color:'rgba(255,255,255,.08)'}},
+              y:{ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},grid:{color:'rgba(255,255,255,.08)'}}
             }
           }
         });
@@ -1574,20 +1094,10 @@
           options:{
             responsive:true,
             maintainAspectRatio:false,
-            plugins:{
-              legend:{
-                labels:{color:'#fff',font:{family:'Cairo',size:12}}
-              }
-            },
+            plugins:{legend:{labels:{color:'#fff',font:{family:'Cairo',size:12}}}},
             scales:{
-              x:{
-                ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},
-                grid:{color:'rgba(255,255,255,.08)'}
-              },
-              y:{
-                ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},
-                grid:{color:'rgba(255,255,255,.08)'}
-              }
+              x:{ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},grid:{color:'rgba(255,255,255,.08)'}},
+              y:{ticks:{color:'rgba(255,255,255,.82)',font:{family:'Cairo',size:11}},grid:{color:'rgba(255,255,255,.08)'}}
             }
           }
         });
@@ -1616,37 +1126,24 @@
         const manualRate = Number(($('pdfExchangeRate')?.value || '').trim()) || 0;
 
         if(manualRate > 0){
-          return {
-            rate:manualRate,
-            source:'سعر مكتوب يدويًا'
-          };
+          return {rate:manualRate,source:'سعر مكتوب يدويًا'};
         }
 
         const totalSYP = data.reduce((s,r)=>s+normalizeAmountSYP(r),0);
         const totalUSD = data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
         if(totalSYP > 0 && totalUSD > 0){
-          return {
-            rate:totalSYP / totalUSD,
-            source:'محسوب من البيانات'
-          };
+          return {rate:totalSYP / totalUSD,source:'محسوب من البيانات'};
         }
 
         const rates = data.map(r=>normalizeExchangeRate(r)).filter(v=>v>0);
 
         if(rates.length){
           const avg = rates.reduce((a,b)=>a+b,0) / rates.length;
-
-          return {
-            rate:avg,
-            source:'متوسط أسعار السجلات'
-          };
+          return {rate:avg,source:'متوسط أسعار السجلات'};
         }
 
-        return {
-          rate:0,
-          source:'غير متوفر'
-        };
+        return {rate:0,source:'غير متوفر'};
       },
 
       buildGroupedReportPages(data){
@@ -1654,9 +1151,7 @@
         const pdfRate = rateInfo.rate;
 
         const totalSYP = data.reduce((s,r)=>s+normalizeAmountSYP(r),0);
-        const totalUSD = pdfRate > 0
-          ? totalSYP / pdfRate
-          : data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
+        const totalUSD = pdfRate > 0 ? totalSYP / pdfRate : data.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
         const allDates = [...new Set(data.map(r=>getDateValue(r)).filter(Boolean))]
           .sort((a,b)=>new Date(a)-new Date(b));
@@ -1668,18 +1163,9 @@
         const grouped = PDF_GROUPS.map(g=>{
           const rows = data.filter(r=>g.names.includes(normalizeName(r)));
           const syp = rows.reduce((s,r)=>s+normalizeAmountSYP(r),0);
-          const usd = pdfRate > 0
-            ? syp / pdfRate
-            : rows.reduce((s,r)=>s+normalizeAmountUSD(r),0);
+          const usd = pdfRate > 0 ? syp / pdfRate : rows.reduce((s,r)=>s+normalizeAmountUSD(r),0);
 
-          return {
-            label:g.label,
-            names:g.names,
-            color:g.color,
-            count:rows.length,
-            syp,
-            usd
-          };
+          return {label:g.label,names:g.names,color:g.color,count:rows.length,syp,usd};
         });
 
         const maxSyp = Math.max(...grouped.map(g=>g.syp),1);
@@ -1718,9 +1204,7 @@
           .map(item=>`<span style="display:inline-block;background:#dbeafe;color:#1e3a8a;border:1px solid #bfdbfe;padding:6px 10px;border-radius:999px;margin:3px;font-size:10px;font-weight:900">${esc(item)}</span>`)
           .join('');
 
-        const pages = [];
-
-        pages.push(`
+        const page = `
           <div class="pdf-page">
             <div class="pdf-hero">
               <h1>تقرير الإيرادات المجمّع</h1>
@@ -1729,25 +1213,10 @@
             </div>
 
             <div class="pdf-summary-grid">
-              <div class="pdf-card">
-                <div class="k">إجمالي SYP</div>
-                <div class="v">${fmtN(totalSYP)}</div>
-              </div>
-
-              <div class="pdf-card">
-                <div class="k">إجمالي USD</div>
-                <div class="v">${fmtN(totalUSD)}</div>
-              </div>
-
-              <div class="pdf-card">
-                <div class="k">سعر الصرف</div>
-                <div class="v">${pdfRate > 0 ? fmtN(pdfRate) : '-'}</div>
-              </div>
-
-              <div class="pdf-card">
-                <div class="k">عدد العمليات</div>
-                <div class="v">${fmtN(data.length)}</div>
-              </div>
+              <div class="pdf-card"><div class="k">إجمالي SYP</div><div class="v">${fmtN(totalSYP)}</div></div>
+              <div class="pdf-card"><div class="k">إجمالي USD</div><div class="v">${fmtN(totalUSD)}</div></div>
+              <div class="pdf-card"><div class="k">سعر الصرف</div><div class="v">${pdfRate > 0 ? fmtN(pdfRate) : '-'}</div></div>
+              <div class="pdf-card"><div class="k">عدد العمليات</div><div class="v">${fmtN(data.length)}</div></div>
             </div>
 
             <div class="pdf-box">
@@ -1769,80 +1238,20 @@
                     <th>النسبة</th>
                   </tr>
                 </thead>
-                <tbody>
-                  ${groupedRows}
-                </tbody>
+                <tbody>${groupedRows}</tbody>
               </table>
             </div>
 
             <div class="pdf-box">
               <div class="pdf-box-title">الرسم البياني المجمّع</div>
-              <div class="pdf-bar-chart">
-                ${barsHtml}
-              </div>
+              <div class="pdf-bar-chart">${barsHtml}</div>
             </div>
 
-            <div class="pdf-footer">
-              تم إنشاء التقرير بتاريخ ${displayDateTime(new Date())}
-            </div>
+            <div class="pdf-footer">تم إنشاء التقرير بتاريخ ${displayDateTime(new Date())}</div>
           </div>
-        `);
+        `;
 
-        const detailChunks = chunk(data,18);
-
-        detailChunks.forEach((rows,i)=>{
-          const detailRows = rows.map(r=>{
-            const syp = normalizeAmountSYP(r);
-            const usd = pdfRate > 0 ? syp / pdfRate : normalizeAmountUSD(r);
-
-            return `
-              <tr>
-                <td>${esc(displayDate(getDateValue(r)||'-'))}</td>
-                <td>${esc(normalizeName(r)||'-')}</td>
-                <td>${esc(normalizeRegion(r)||'-')}</td>
-                <td class="num">${fmtN(syp)}</td>
-                <td class="num">${fmtN(usd)}</td>
-                <td class="num">${pdfRate > 0 ? fmtN(pdfRate) : fmtN(normalizeExchangeRate(r))}</td>
-                <td>${esc(r.description || r.note || '-')}</td>
-              </tr>
-            `;
-          }).join('');
-
-          pages.push(`
-            <div class="pdf-page">
-              <div class="pdf-hero">
-                <h1>تفاصيل السجل</h1>
-                <p>صفحة ${i+1} من ${detailChunks.length} — حسب الفلاتر الحالية</p>
-              </div>
-
-              <div class="pdf-box">
-                <div class="pdf-box-title">تفاصيل العمليات</div>
-                <table class="pdf-table">
-                  <thead>
-                    <tr>
-                      <th>التاريخ</th>
-                      <th>الاسم</th>
-                      <th>المجموعة</th>
-                      <th>SYP</th>
-                      <th>USD</th>
-                      <th>سعر الصرف</th>
-                      <th>الوصف</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    ${detailRows}
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="pdf-footer">
-                تم إنشاء التقرير بتاريخ ${displayDateTime(new Date())}
-              </div>
-            </div>
-          `);
-        });
-
-        $('reportRender').innerHTML = pages.join('');
+        $('reportRender').innerHTML = page;
         return [...$('reportRender').querySelectorAll('.pdf-page')];
       },
 
@@ -1897,30 +1306,26 @@
           const { jsPDF } = window.jspdf;
           const pdf = new jsPDF('p','pt','a4');
 
-          toast('جاري إنشاء PDF...');
+          toast('جاري إنشاء PDF صفحة واحدة...');
 
-          for(let i=0;i<pages.length;i++){
-            const canvas = await html2canvas(pages[i],{
-              scale:2.2,
-              useCORS:true,
-              backgroundColor:'#eef4ff',
-              logging:false
-            });
+          const canvas = await html2canvas(pages[0],{
+            scale:2.2,
+            useCORS:true,
+            backgroundColor:'#eef4ff',
+            logging:false
+          });
 
-            const imgData = canvas.toDataURL('image/jpeg',0.96);
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
+          const imgData = canvas.toDataURL('image/jpeg',0.96);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = pdf.internal.pageSize.getHeight();
 
-            if(i > 0) pdf.addPage();
-
-            pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
-          }
+          pdf.addImage(imgData,'JPEG',0,0,pdfWidth,pdfHeight);
 
           const from = $('dateFrom').value || 'all';
           const to = $('dateTo').value || 'all';
 
           pdf.save(`grouped_revenue_report_${from}_to_${to}.pdf`);
-          toast('تم إنشاء PDF المجمّع بنجاح');
+          toast('تم إنشاء PDF صفحة واحدة بنجاح');
         }catch(err){
           console.error(err);
           toast('صار خطأ أثناء إنشاء التقرير','err');
