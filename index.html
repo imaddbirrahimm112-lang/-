@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>لوحة التحكم الذكية - الإيرادات</title>
 
+  <script>
+    try {
+      var __t = localStorage.getItem('dash_theme');
+      if (__t === 'midnight') document.documentElement.setAttribute('data-theme','midnight');
+    } catch(e) {}
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -496,6 +503,60 @@
       .topbar{flex-direction:column;align-items:flex-start}
       .chart-wrap{height:260px}
     }
+
+    html[data-theme="midnight"]{
+      --bg1:#000000;
+      --bg2:#0a0a0a;
+      --bg3:#161616;
+      --glass:rgba(192,192,192,.05);
+      --border:rgba(192,192,192,.18);
+      --text:#e6e8eb;
+      --muted:rgba(230,232,235,.62);
+      --shadow:0 20px 40px rgba(0,0,0,.55);
+    }
+
+    html[data-theme="midnight"] body{
+      background:
+        radial-gradient(circle at 15% 20%,rgba(192,192,192,.08),transparent 30%),
+        radial-gradient(circle at 85% 15%,rgba(160,160,160,.06),transparent 30%),
+        radial-gradient(circle at 70% 80%,rgba(180,180,180,.05),transparent 30%),
+        linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    }
+
+    html[data-theme="midnight"] body::before{opacity:.18}
+
+    html[data-theme="midnight"] .topbar{background:rgba(255,255,255,.03)}
+
+    html[data-theme="midnight"] .btn-primary{
+      background:linear-gradient(135deg,#5a5a5a,#2a2a2a);
+    }
+    html[data-theme="midnight"] .btn-accent{
+      background:linear-gradient(135deg,#3f3f46,#18181b);
+    }
+    html[data-theme="midnight"] .btn-warm{
+      background:linear-gradient(135deg,#737373,#3f3f46);
+    }
+    html[data-theme="midnight"] .leader-bar span{
+      background:linear-gradient(90deg,#9ca3af,#4b5563);
+    }
+    html[data-theme="midnight"] .hero-alert{
+      background:linear-gradient(135deg,rgba(192,192,192,.10),rgba(120,120,120,.10));
+      border-color:rgba(192,192,192,.22);
+    }
+    html[data-theme="midnight"] .hero-alert .txt span{color:#cbd5e1}
+    html[data-theme="midnight"] .select option{background:#0a0a0a;color:#e6e8eb}
+    html[data-theme="midnight"] th{background:rgba(255,255,255,.05)}
+    html[data-theme="midnight"] tr:hover td{background:rgba(255,255,255,.03)}
+    html[data-theme="midnight"] .toast.ok{
+      background:rgba(120,120,120,.18);
+      border:1px solid rgba(192,192,192,.32);
+      color:#e6e8eb;
+    }
+    html[data-theme="midnight"] .toast.err{
+      background:rgba(80,80,80,.22);
+      border:1px solid rgba(200,80,80,.45);
+      color:#fecaca;
+    }
   </style>
 </head>
 
@@ -521,6 +582,7 @@
         <button class="btn btn-secondary" onclick="Dashboard.refreshNow()">🔄 تحديث</button>
         <button class="btn btn-warm" onclick="Dashboard.exportCsv()">📥 CSV</button>
         <button class="btn btn-accent" onclick="Dashboard.exportPdf()">📄 PDF صفحة واحدة</button>
+        <button class="btn btn-secondary" id="themeBtn" onclick="Dashboard.toggleTheme()" title="تبديل الوضع">🌙 ليلي</button>
         <button class="btn btn-secondary" onclick="Dashboard.toggleSettings()">⚙️ الإعدادات</button>
       </div>
     </div>
@@ -893,9 +955,31 @@
 
       init(){
         $('todayText').textContent = 'اليوم: ' + displayDate(todayStr());
+        this.syncThemeButton();
         this.initNameOptions();
         this.loadConfigToInputs();
         this.autoStartIfConfig();
+      },
+
+      syncThemeButton(){
+        const isDark = document.documentElement.getAttribute('data-theme') === 'midnight';
+        const btn = $('themeBtn');
+        if(btn) btn.innerHTML = isDark ? '☀️ نهاري' : '🌙 ليلي';
+      },
+
+      toggleTheme(){
+        const cur = document.documentElement.getAttribute('data-theme');
+        const next = cur === 'midnight' ? null : 'midnight';
+
+        if(next) document.documentElement.setAttribute('data-theme', next);
+        else document.documentElement.removeAttribute('data-theme');
+
+        try{
+          if(next) localStorage.setItem('dash_theme', next);
+          else localStorage.removeItem('dash_theme');
+        }catch(e){}
+
+        this.syncThemeButton();
       },
 
       initNameOptions(){
